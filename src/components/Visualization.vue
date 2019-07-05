@@ -1,12 +1,11 @@
 <template>
   <div id="visualization">
-    <div id="map" />
+    <h1>{{ visualization_title }}</h1>
+    <div id="map" ></div>
     <MglMap
-            container="map-test"
-            :center.sync="center"
-            :mapStyle="mapStyle"
-    >
-    </MglMap>
+      container="map-visualization"
+      :map-style="mapStyle"
+    />
   </div>
 </template>
 
@@ -46,6 +45,9 @@
 
   export default {
     name: 'Visualization',
+    props: {
+      visualization_title: String
+    },
     components: {
       MglMap
     },
@@ -64,7 +66,7 @@
               id: "background",
               type: "background",
               paint: {
-                "background-color": "#ddeeff"
+                "background-color": "red"
               }
             },
             {
@@ -75,11 +77,18 @@
               paint: {
                 "line-color": "#000000",
                 "line-width": 1
-              }
+              },
+              zoom: 4,
+              minZoom: 4,
+              maxZoom: 8,
+              center: [-95.7129, 37.0902]
             }
           ]
         }
       }
+    },
+    created() {
+      this.mapbox = Mapbox;
     },
     mounted() {
       this.createMap();
@@ -105,5 +114,9 @@
   #map{
     height: 900px;
   }
+  .mgl-map-wrapper{
+    height: 900px;
+  }
+
 </style>
 

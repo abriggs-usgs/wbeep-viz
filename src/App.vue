@@ -1,21 +1,21 @@
 <template>
   <div id="app">
     <HeaderUSGS />
-    <MapBox />
+    <Visualization visualization_title="A Title Related to Water Availability"/>
     <FooterUSGS />
   </div>
 </template>
 
 <script>
 import HeaderUSGS from './components/HeaderUSGS'
-import MapBox from './components/MapBox'
+import Visualization from './components/Visualization.vue'
 import FooterUSGS from './components/FooterUSGS'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     HeaderUSGS,
-    MapBox,
+    Visualization,
     FooterUSGS
   }
 }
