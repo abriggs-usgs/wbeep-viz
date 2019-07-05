@@ -7,15 +7,13 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import HeaderUSGS from './components/HeaderUSGS'
 import MapBox from './components/MapBox'
-import FooterUSGS from './components/FooterUSGS' //this line is the module import
+import FooterUSGS from './components/FooterUSGS'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     HeaderUSGS,
     MapBox,
     FooterUSGS
