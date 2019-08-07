@@ -138,28 +138,6 @@
                     let layers = document.getElementById('menu');
                     layers.appendChild(link);
                 }
-
-                let hoveredHRUId = this.hoveredHRUId;
-                map.on("mousemove", "HRUS Fill Colors", function(e) {
-                    if (e.features.length > 0) {
-                        if (hoveredHRUId) {
-                            // map.setFeatureState({source: 'HRU', sourceLayer: 'HRUS Fill Colors', id: hoveredHRUId}, { hover: false});
-                        }
-                    // console.log('this is hoveredHRUID: ' + e.features[0].id)
-                        // hoveredHRUId = e.features[0].id;
-                        // map.setFeatureState({source: 'HRU', sourceLayer: 'HRUS Fill Colors', id: hoveredHRUId}, { hover: true});
-                    }
-                });
-                map.on("mouseleave", "HRUS Fill Colors", function() {
-                    console.log('this is 4: ' + hoveredHRUId)
-                    if (hoveredHRUId) {
-                        console.log('this is 5: ' + hoveredHRUId)
-                        // map.setFeatureState({source: 'HRU', sourceLayer: 'HRUS Fill Colors', id: hoveredHRUId}, { hover: false});
-                    }
-                    console.log('this is 6: ' + hoveredHRUId)
-                    hoveredHRUId =  null;
-
-                });
             }
         }
     }
