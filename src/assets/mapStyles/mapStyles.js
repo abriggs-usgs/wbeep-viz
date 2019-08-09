@@ -1,19 +1,27 @@
 export default {
-    'style': {
-        'version': 8,
-        'sources': {
-            'basemap': {
-                'type': 'vector',
-                'url': 'http://localhost:8086/data/basemap.json'
+    style: {
+        version: 8,
+        sources: {
+            basemap: {
+                type: "vector",
+                // This URL will pull the basemap GeoJson from S3 so that no local tile server is required.
+                // NOTE: this location is under development and may change. If you suddenly lose parts of the map, it
+                // may be that we have moved the tiles to a new location on S3.
+                "tiles": ["https://d38anyyapxci3p.cloudfront.net/baseTiles_3/{z}/{x}/{y}.pbf"]
+                // url: "http://localhost:8086/data/basemap.json"
+                // The above URL is an example for using a local mbtiles file and a tile server. See the readme for more
+                // information: https://github.com/usgs-makerspace/wbeep-viz#start-run-the-tile-server
             },
-            'HRU': {
-                'type': 'vector',
-                'url': 'http://localhost:8085/data/new2.json'
-                // amazon S3 'tiles': ['http://wbeep-test-website.s3-website-us-west-2.amazonaws.com/tiles/{z}/{x}/{y}.pbf'],
-                // locally, you can run tileserver https://www.npmjs.com/package/tileserver-gl-light
-                // host the tiles in the /tiles dir with tileserver-gl-light /path/to/repo/tiles/new2.mbtiles -p 8085
-                // then change the line above to have the map look for local tileserver instead of s3 path
-                // url: 'http://127.0.0.1:8085/data/new2.json'
+            HRU: {
+                type: "vector",
+                // This URL will pull the Hydrological Response Units(HRUs) GeoJson from S3 so that no local tile server
+                // is required.
+                // NOTE: this location is under development and may change. If you suddenly your HRUs from the map, it
+                // may be that we have moved the HRU tiles to a new location on S3.
+                "tiles": ["https://d38anyyapxci3p.cloudfront.net/tileTemp_3/{z}/{x}/{y}.pbf"]
+                // url: "http://localhost:8085/data/new2.json"
+                // The above URL is an example for using a local mbtiles file and a tile server. See the readme for more
+                // information: https://github.com/usgs-makerspace/wbeep-viz#start-run-the-tile-server
             }
         },
         'sprite': '',

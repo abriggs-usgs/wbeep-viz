@@ -22,8 +22,89 @@ Starting the Vue development server at this point will show a website with heade
 ```
 npm run serve
 ```
+#### UPDATE
+#### We are working to consolidate and simplify working with the map locally. So, if  you pulled recent code, your map may just work.
+Now you can run the map locally from S3 without the need for local tile servers. This is still in the test phase
+so it still may be of benefit to read the sections after this one that explain how to set up 
+the tiles to run from a local source.
 
-To get the map working locally several things need to happen.
+But for now, here is the easy way.
+
+There is a file in the project called mapStyles.js (src/mapStyles/mapStyles.js). This is a configuration file for Mapbox and it tells Mapbox a bunch
+of important details about how to create the map. What is important to us at the moment are two things, the 'source' and the 
+'source-layer.' The 'source' is where Mapbox should look for the 'tiles.' The 'source-layer' is only important to vector
+tile sources, so for something like pure GeoJson you will not need it, but since our tiles are vector we will need to make
+sure our source layer is correct.
+
+The mapStyles.js is really just a ES6 JSON object called 'style', so like all JSON objects it is made up of key/value pairs.
+Of main concern is the 'sources' key. In the following example, we can see that there are two sources for our map layers.
+one called 'basemap' and another called 'HRU.' Mapbox needs two bits of information to process the source correctly, the 
+'type' and the location. Mapbox can process many different source types, the source we are using are vector, meaning mathematical
+created lines rather than dot graphed. Our vector tiles are stored in Amazon Web Services (AWS) and we have to tell that to 
+Mapbox. What is important here is to know that our 'tiles' on AWS are in 'protobuf' format (.pbf). Protobuf is one of several
+tile formats that Mapbox can use. To load a '.pbf' source, we need the "tiles" key along with the resource location
+in the form of an array as shown below (for more information read the 'Wait! Important to know: Local tiles and AWS 
+tiles are DIFFERENT!' section). 
+```
+    style: {
+        version: 8,
+        sources: {
+            basemap: {
+                type: "vector",
+                "tiles": ["https://d38anyyapxci3p.cloudfront.net/baseTiles_3/{z}/{x}/{y}.pbf"]             
+            },
+            HRU: {
+                type: "vector",
+                "tiles": ["https://d38anyyapxci3p.cloudfront.net/tileTemp_3/{z}/{x}/{y}.pbf"]               
+            }
+        },
+```
+If you pulled the code from Github, the locations are probably correct and your map should start up with no extra effort.
+However, if you are using the S3 sources and your map is not showing, or is missing layers, it may be that 
+1) we moved the tiles on S3
+2) you do not have the right 'source-layer' name
+
+So, about sources and layers. Each source can be the parent of many map layers. Remember, that in the sample above, we had
+two sources. That does not mean that we have only two layers. Each source can hold the information needed to make many layers.
+In our map, we do just that. And we let Mapbox know which layers to make from each source by adding that information into the
+Mapbox configuration file, which, as mentioned previously, is called mapStyles.js in our project.
+```
+            {
+                id: "HRUS Fill Colors",
+                type: "fill",
+                source: "HRU",
+                "source-layer": "no_simp_prec5", // make sure this name is right
+                "layout": {
+                    "visibility": "visible"
+                },
+                paint: {
+                    "fill-color": {
+                        "property": "SoilMoisture",
+                        "type": 'categorical',
+                        "stops": [
+                            ["","#000000"],
+                            ["very low","#CC4C02"],
+                            ["low", "#EDAA5F"],
+                            ["average","#FED98E"],
+                            ["high","#A7B9D7"],
+                            ["very high","#144873"],
+                        ]
+                    },
+                    "fill-opacity": 1
+                },
+                "showButton": true
+            },
+``` 
+Above, is a sample of that shows how a map layer is defined. The detail that is important here is to note the 'source-layer'
+key. This has to match the name of the 'source-layer' in the tiles, and the name is defined by the person creating the tiles.
+So, it sometimes changes. If you find that a layer is not showing as expected, check that the 'source-layer' has the correct name.
+
+How do you know the name of the 'source-layer?' Well, it is not totally straight-forward. A way that works is to us a handy
+program called, Vector Inspector https://stevage.github.io/vector-inspector/ . 'Vector Inspector' will give the name of
+the 'source-layer' as shown circled in the image below. 
+![alt text](./markDownImages/VectorInspector.png "Image of Vector Inspector")
+ 
+Okay the above information should get your map working. However, if for some reason you chose to go 'old school' and run the tiles from a local source, there are a few things you need to know. 
 1) Get the map tiles and add them to the project
 2) Check that URLs for the tiles are correct
 3) Start run the tile server
@@ -130,6 +211,10 @@ aws s3 cp <local directory> <s3 target bucket> --recursive --content-encoding 'g
 
 // specific example, transfering contents of current working directory
 aws s3 cp . s3://wbeep-qa-website/tiles --recursive --content-encoding 'gzip' --content-type 'application/gzip'
+
+// Note: using the 'content-type' application/x-protobuf also seems to work, and may be the better choice
+// Here a specific example
+aws s3 cp . s3://wbeep-qa-website/tiles --recursive --content-encoding 'gzip' --content-type 'application/x-protobuf'
 ```
 If you do not configure the file compression correctly, when the application is run, Mapbox-gl will not be able to read the tiles, leaving you with
 a map-less web page and a cryptic error in the console.
