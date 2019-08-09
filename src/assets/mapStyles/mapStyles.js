@@ -192,23 +192,23 @@ export default {
                     'text-font': [
                         'Roboto Regular'
                     ],
-                    'text-size': 12,
-                    'symbol-placement': 'point',
-                    'text-line-height': 1.2,
-                    'text-justify': 'center',
-                    'text-anchor': 'bottom',
-                    'text-offset': [
+                    "text-size": 12,
+                    "symbol-placement": "point",
+                    "text-line-height": 1.2,
+                    "text-justify": "center",
+                    "text-anchor": "bottom",
+                    "text-offset": [
                         0,
                         -0.5
                     ]
                 },
-                'paint': {
-                    'text-color': 'rgba(255,255,255, 1)',
-                    'text-halo-width': 1,
-                    'text-halo-blur': 1,
-                    'text-halo-color': 'rgba(0, 0, 0, 0.5)',
+                "paint": {
+                    "text-color": "rgba(255,255,255, 1)",
+                    "text-halo-width": 1,
+                    "text-halo-blur": 1,
+                    "text-halo-color": "rgba(0, 0, 0, 0.5)",
                 },
-                'showButton': true
+                "showButton": true
             }
         ]
     }
