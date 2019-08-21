@@ -1,13 +1,19 @@
 <template>
   <div id="viz_container">
-    <div class="usa-prose">
-      <h2 class="title-text">
-        {{ title }}
-      </h2>
-    </div>
-    <hr>
+    <div class="header-container">
+      <div class="usa-prose">
+        <h2 class="title-text">
+          {{ title }}
+        </h2>
+      </div>
+      <hr>
 
-    <nav id="menu" />
+      <nav
+        id="layer-bar"
+        class="layer-toggle"
+      />
+    </div>
+    <MapLegend :legend-title="legendTitle" />
     <MglMap
       id="map"
       :container="container"
@@ -44,6 +50,7 @@
 </template>
 
 <script>
+    import MapLegend from './MapLegend'
     import {
         MglMap,
         MglRasterLayer,
@@ -62,7 +69,8 @@
             MglNavigationControl,
             MglGeolocateControl,
             MglFullscreenControl,
-            MglScaleControl
+            MglScaleControl,
+            MapLegend
         },
         props: {
             title: {
@@ -79,6 +87,7 @@
                 maxZoom: 8,
                 center: [-95.7129, 37.0902],
                 hoveredHRUId: null,
+                legendTitle: 'Calculated Availability',
                 accessToken: 'pk.eyJ1IjoiYWJyaWdncyIsImEiOiJjandrd3J4bmMwcjNpNGFxZ2hoZGE2djR5In0.gKPNdhLzvbzui4aiIwAihA',
                 rasterSource: {'id': 'dem',
                     "type": "raster-dem",
@@ -110,8 +119,7 @@
 
                     let link = document.createElement('button');
                     link.href = '#';
-                    link.className = 'active';
-                    link.className = 'usa-button--accent-cool'; // adds USWDS button style to element
+                    link.className = 'usa-button--accent-cool';
                     link.textContent = id;
 
                     // Creates a click event for each button so that when clicked by the user, the visibility property
@@ -125,30 +133,49 @@
 
                         if (visibility === 'visible') {
                             map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-                            this.className = '';
-                            this.className = 'usa-button--base'; // adds USWDS button style to element
+                            this.className = 'usa-button--base';
                         } else {
-                            this.className = 'active';
                             this.className = 'usa-button--accent-cool';
                             map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
                         }
                     };
 
-                    // Add the toggle layer buttons to the 'menu' element
-                    let layers = document.getElementById('menu');
+                    // Add the toggle layer buttons to the 'layer-bar' element
+                    let layers = document.getElementById('layer-bar');
                     layers.appendChild(link);
                 }
+
+                // next section controls the HRU hover effect
+                let hoveredHRUId = this.hoveredHRUId;
+                map.on("mousemove", "HRUS Fill Colors", function(e) {
+                    if (e.features.length > 0) {
+                        if (hoveredHRUId) {
+                            map.setFeatureState({source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId}, { hover: false});
+                        }
+                        hoveredHRUId = e.features[0].id;
+                        map.setFeatureState({source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId}, { hover: true});
+                    }
+                });
+                map.on("mouseleave", "HRUS Fill Colors", function() {
+                    if (hoveredHRUId) {
+                        map.setFeatureState({source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId}, { hover: false});
+                    }
+                    hoveredHRUId =  null;
+                });
             }
         }
     }
 </script>
 
-
 <style scoped lang="scss">
   @import"~mapbox-gl/dist/mapbox-gl.css";
 
+  .header-container {
+    background-color: white;
+  }
+
   #map {
-    height: 60vh;
+    height: 70vh;
   }
 
   /* override USWDS style to prevent title from wrapping too soon */
@@ -162,6 +189,4 @@
     margin: 2px 0 0 0;
     padding-bottom: 0;
   }
-
 </style>
-

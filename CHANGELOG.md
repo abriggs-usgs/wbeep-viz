@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added Legend
+- Added hover effect to HRUs
 - Changed to allow tile assets to be pulled from S3
 - Added layer toggle for all layers, and added 'showButton' property to mapStyles.js to control display of buttons
 - Moved the map styles to a separate mapStyles.js 
@@ -17,3 +19,4 @@ All notable changes to this project will be documented in this file.
 - Fixed menu bar title, added more appropriate title to page
 - Added appropriate changes to the style variable in the Mapbox.vue to style the map the way I chose to
 - Added USWDS components, Added title, removed component not needed
+- Adjusted the minimum zoom level to 3 as well as the default/initial zoom level to 3
