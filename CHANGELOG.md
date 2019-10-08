@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Changed to use environment variables for builds and feature toggles
 - Map Layers Toggle Button
 - Added Google Analytics plugin
 - Changed to use grouped stream orders

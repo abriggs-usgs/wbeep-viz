@@ -1,5 +1,3 @@
-console.log('this is the env stuff ', process.env)
-
 // Since the Mapbox gl wants the tile request to have an array containing the URL for the tiles, we need to
 // grab the URL for the correct tier from the environment variables and prepackage the result as an array
 const hruTileUrl = [];
