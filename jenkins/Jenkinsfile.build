@@ -68,28 +68,5 @@ pipeline {
                 """
             }
         }
-        
-        post {
-            success {
-                mail to: 'tworr@usgs.gov, abriggs@contractor.usgs.gov, mwernimont@contractor.usgs.gov',
-                subject: "Success: ${currentBuild.fullDisplayName}",
-                body: "Build finished successfully ${env.BUILD_URL}"
-            }
-            unstable {
-                mail to: 'tworr@usgs.gov, abriggs@contractor.usgs.gov, mwernimont@contractor.usgs.gov',
-                subject: "Unstable: ${currentBuild.fullDisplayName}",
-                body: "Build is unstable ${env.BUILD_URL}"
-            }
-            failure {
-                mail to: 'tworr@usgs.gov, abriggs@contractor.usgs.gov, mwernimont@contractor.usgs.gov',
-                subject: "Failure: ${currentBuild.fullDisplayName}",
-                body: "Build failed ${env.BUILD_URL}"
-            }
-            changed {
-                mail to: 'tworr@usgs.gov, abriggs@contractor.usgs.gov, mwernimont@contractor.usgs.gov',
-                subject: "Changes: ${currentBuild.fullDisplayName}",
-                body: "Build detected changes ${env.BUILD_URL}"
-            }
-    }
     }
 }
