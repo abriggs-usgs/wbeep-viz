@@ -11,7 +11,7 @@ export default {
                 type: 'vector',
                 'tiles': ['https://maptiles-prod-website.s3-us-west-2.amazonaws.com/misctilesets/usstatecounties/{z}/{x}/{y}.pbf'],
                 'minzoom': 2, // setting this to equal the minzoom of main map, real tile extent is 2
-                'maxzoom': 10  // setting this to the real tile extent is 10
+                'maxzoom': 12  // setting this to the real tile extent is 10
             },
             HRU: {
                 type: 'vector',
@@ -50,48 +50,48 @@ export default {
                 'type': 'background',
                 'showButtonLayerToggle': false
             },
-            {
-                'id': 'HRUs',
-                'type': 'fill',
-                'source': 'HRU',
-                'source-layer': 'hrus',
-                'layout': {
-                    'visibility': 'visible'
-                },
-                'paint': {
-                    'fill-color': {
-                        'property': 'value',
-                        'type': 'categorical',
-                        'stops': [
-                            ['very high','#1C2040'],
-                            ['high','#337598'],
-                            ['average','#C8D3BA'],
-                            ['low', '#BDAD9D'],
-                            ['very low','#967a4a'],
-                            ['','#000000'],
-                        ]
-                    },
-                    'fill-opacity': ['case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        0.7,
-                        1
-                    ],
-                    'fill-outline-color': ['case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        'rgba(0, 0, 0, 1)',
-                        'rgba(0, 0, 0, 0.0)'
-                    ],
-                },
-                'showButtonLayerToggle': false,
-                'legendText': {
-                    'very high': ['Uncommonly Wet',' \- it\'s typically drier than it is today in this region'],
-                    'high': ['',''],
-                    'average': ['Common',' \- today is normal for this region'],
-                    'low': ['',''],
-                    'very low': ['Uncommonly Dry',' \- it\'s typically wetter than it is today in this region'],
-                    'no data': ['','No Data']
-                }
-            },
+            // {
+            //     'id': 'HRUs',
+            //     'type': 'fill',
+            //     'source': 'HRU',
+            //     'source-layer': 'hrus',
+            //     'layout': {
+            //         'visibility': 'visible'
+            //     },
+            //     'paint': {
+            //         'fill-color': {
+            //             'property': 'value',
+            //             'type': 'categorical',
+            //             'stops': [
+            //                 ['very high','#1C2040'],
+            //                 ['high','#337598'],
+            //                 ['average','#C8D3BA'],
+            //                 ['low', '#BDAD9D'],
+            //                 ['very low','#967a4a'],
+            //                 ['','#000000'],
+            //             ]
+            //         },
+            //         'fill-opacity': ['case',
+            //             ['boolean', ['feature-state', 'hover'], false],
+            //             0.7,
+            //             1
+            //         ],
+            //         'fill-outline-color': ['case',
+            //             ['boolean', ['feature-state', 'hover'], false],
+            //             'rgba(0, 0, 0, 1)',
+            //             'rgba(0, 0, 0, 0.0)'
+            //         ],
+            //     },
+            //     'showButtonLayerToggle': false,
+            //     'legendText': {
+            //         'very high': ['Uncommonly Wet',' \- it\'s typically drier than it is today in this region'],
+            //         'high': ['',''],
+            //         'average': ['Common',' \- today is normal for this region'],
+            //         'low': ['',''],
+            //         'very low': ['Uncommonly Dry',' \- it\'s typically wetter than it is today in this region'],
+            //         'no data': ['','No Data']
+            //     }
+            // },
             {
                 'filter': ['all', ['==', '$type', 'LineString'],
                     ['in', 'class', 'minor', 'service', 'trunk', 'primary', 'secondary', 'tertiary', 'motorway']
@@ -262,20 +262,20 @@ export default {
                 'showButtonLayerToggle': false,
                 'showButtonStreamToggle': true,
             },
-            {
-                'id': 'Hydrologic Response Unit',
-                'type': 'line',
-                'source': 'HRU',
-                'source-layer': 'hrus',
-                'layout': {
-                    'visibility': 'none'
-                },
-                'paint': {
-                    'line-color': 'rgba(57, 79, 87, 1)'
-                },
-                'showButtonLayerToggle': true,
-                'showButtonStreamToggle': false
-            },
+            // {
+            //     'id': 'Hydrologic Response Unit',
+            //     'type': 'line',
+            //     'source': 'HRU',
+            //     'source-layer': 'hrus',
+            //     'layout': {
+            //         'visibility': 'none'
+            //     },
+            //     'paint': {
+            //         'line-color': 'rgba(57, 79, 87, 1)'
+            //     },
+            //     'showButtonLayerToggle': true,
+            //     'showButtonStreamToggle': false
+            // },
             {
                 'id': 'Neighboring Countries',
                 'type': 'fill',

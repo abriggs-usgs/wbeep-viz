@@ -37,7 +37,10 @@
         >
           <div class="grid-row grid-gap-lg">
             <div class="usa-banner__guidance tablet:grid-col-6">
-              <iconDot class="usa-banner__icon usa-media-block__img" alt="Dot gov"/>
+              <iconDot
+                class="usa-banner__icon usa-media-block__img"
+                alt="Dot gov"
+              />
               <div class="usa-media-block__body">
                 <p>
                   <strong>The .gov means it’s official.</strong>
@@ -49,7 +52,10 @@
               </div>
             </div>
             <div class="usa-banner__guidance tablet:grid-col-6">
-              <iconHTTPS class="usa-banner__icon usa-media-block__img" alt="Dot gov"/>
+              <iconHTTPS
+                class="usa-banner__icon usa-media-block__img"
+                alt="Dot gov"
+              />
               <div class="usa-media-block__body">
                 <p>
                   <strong>The site is secure.</strong>

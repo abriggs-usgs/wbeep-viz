@@ -24,7 +24,6 @@
         :pitch-with-rotate="false"
         :drag-rotate="false"
         :touch-zoom-rotate="false"
-        :max-bounds="maxBounds"
         @load="onMapLoaded"
       >
         <MglAttributionControl
@@ -48,6 +47,8 @@
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
         development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
+    <button id='fly'>Fly</button>
+    <div id="coords"></div>
   </div>
 </template>
 <script>
@@ -66,6 +67,8 @@ import {
   MglAttributionControl
 } from "vue-mapbox";
 import mapStyles from "../assets/mapStyles/mapStyles";
+import mariaTrackGeoJSON from "../assets/hurricaneTracks/2017_maria";
+import michaelTrackGeoJSON from "../assets/hurricaneTracks/2018_michael";
 
 export default {
   name: "MapBox",
@@ -95,14 +98,14 @@ export default {
     return {
       mapStyle: mapStyles.style,
       container: "map",
-      zoom: 3,
+      zoom: 6,
       minZoom: 2,
       maxZoom: 11,
-      center: [-95.7129, 37.0902],
-      pitch: 0, // tips the map from 0 to 60 degrees
+      center: [-86.6, 17.8],
+      pitch: 45, // tips the map from 0 to 60 degrees
       bearing: 0, // starting rotation of the map from 0 to 360
       hoveredHRUId: null,
-      maxBounds: [[-179.56055624999985, 9.838930211369288], [-11.865243750001127, 57.20768307316615]], // The coordinates needed to make a bounding box for the continental United States.
+      // maxBounds: [[-179.56055624999985, 9.838930211369288], [-11.865243750001127, 57.20768307316615]], // The coordinates needed to make a bounding box for the continental United States.
       legendTitle: "Latest Available Water Status"
     };
   },
@@ -118,7 +121,7 @@ export default {
       let map = event.map; // This gives us access to the map as an object but only after the map has loaded
 
       // Once map is loaded, zoom in a bit more so that the map neatly fills the screen
-      map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]);
+      // map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]);
 
       //Create elements and give them specific ids
       //Div that the map uses to display things fullscreen
@@ -348,6 +351,40 @@ export default {
           }
           map.on("zoomend", onZoomend);
       }
+
+        let hurricaneTrack = [];
+
+
+
+        michaelTrackGeoJSON.michaelData.features.forEach(function(feature) {
+            feature.geometry.coordinates.forEach(function (coordinateSet) {
+                hurricaneTrack.push(coordinateSet)
+            })
+        });
+
+let coorDiv = document.getElementById("coords");
+console.log('hurricane track ' + hurricaneTrack)
+        document.getElementById('fly').addEventListener('click', function () {
+
+            let i = 0;
+            let intervalId = setInterval(function(){
+                if(i === hurricaneTrack.length - 1){
+                  clearInterval(intervalId);
+                }
+                coorDiv.innerHTML = 'the current coordinates ' + hurricaneTrack[i][0] + ', ' + hurricaneTrack[i][1]
+                map.flyTo({
+                    center: [hurricaneTrack[i][0], hurricaneTrack[i][1]],
+                    zoom: 6,
+                    bearing: 0,
+                    speed: 0.1, // make the flying slow
+                    curve: 1, // change the speed at which it zooms out
+// This can be any easing function: it takes a number between
+// 0 and 1 and returns another number between 0 and 1.
+                    easing: function (t) { return t; }
+                });
+                i++;
+            }, 200);
+        });
     }
   }
 };
