@@ -98,10 +98,10 @@ export default {
     return {
       mapStyle: mapStyles.style,
       container: "map",
-      zoom: 6,
+      zoom: 7,
       minZoom: 2,
       maxZoom: 11,
-      center: [-86.6, 17.8],
+      center: [-86.2, 24.6],
       pitch: 45, // tips the map from 0 to 60 degrees
       bearing: 0, // starting rotation of the map from 0 to 360
       hoveredHRUId: null,
@@ -362,28 +362,91 @@ export default {
             })
         });
 
+        let addHurricanPathToMap = function(hurricaneTrackGeoJSON) {
+            map.addSource("michaelTrackGeoJSON", {
+                "type": "geojson",
+                "data": hurricaneTrackGeoJSON
+            });
+        }
+
+        addHurricanPathToMap(michaelTrackGeoJSON.michaelData);
+        map.addLayer({
+            'id': 'hurricane track',
+            'type': 'line',
+            'source': 'michaelTrackGeoJSON',
+            'layout': {
+                'visibility': 'visible',
+            },
+            'paint': {
+                'line-color': 'red',
+                'line-width': {
+                    'base': 2.55,
+                    'stops': [
+                        [0, 4],
+                        [20, 8]
+                    ]
+                }
+            }
+        });
+
+
+        const degreesToRadians = function(degrees) {
+            return degrees * Math.PI / 180;
+        }
+
+        const distanceInKmBetweenEarthCoordinates = function(lat1, lon1, lat2, lon2) {
+            let earthRadiusKm = 6371;
+
+            let dLat = degreesToRadians(lat2-lat1);
+            let dLon = degreesToRadians(lon2-lon1);
+
+            lat1 = degreesToRadians(lat1);
+            lat2 = degreesToRadians(lat2);
+
+            let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return earthRadiusKm * c;
+        }
+
+
 let coorDiv = document.getElementById("coords");
-console.log('hurricane track ' + hurricaneTrack)
         document.getElementById('fly').addEventListener('click', function () {
 
             let i = 0;
+            let mapDistance = null;
+            let distanceAdjustmentMultiplyer = 1;
+            let baseDurationOfFlyToAction = 1000;
             let intervalId = setInterval(function(){
                 if(i === hurricaneTrack.length - 1){
                   clearInterval(intervalId);
                 }
                 coorDiv.innerHTML = 'the current coordinates ' + hurricaneTrack[i][0] + ', ' + hurricaneTrack[i][1]
+
+                if (i < hurricaneTrack.length - 1) {
+                    mapDistance = distanceInKmBetweenEarthCoordinates(hurricaneTrack[i][0], hurricaneTrack[i][1], hurricaneTrack[i+1][0], hurricaneTrack[i+1][1]);
+                }
+
+                if (mapDistance != 0) {
+                    distanceAdjustmentMultiplyer = baseDurationOfFlyToAction/mapDistance;
+                    console.log('this is the multiplier ', distanceAdjustmentMultiplyer)
+                }
+
+                coorDiv.innerHTML = 'the current coordinates are ' + hurricaneTrack[i][0] + ', ' + hurricaneTrack[i][1] + ', and the distance between is ' + mapDistance + ' kilometers.'
+
+
                 map.flyTo({
                     center: [hurricaneTrack[i][0], hurricaneTrack[i][1]],
-                    zoom: 6,
+                    zoom: 7,
                     bearing: 0,
-                    speed: 0.1, // make the flying slow
+                    speed: 0.12, // make the flying slow
                     curve: 1, // change the speed at which it zooms out
-// This can be any easing function: it takes a number between
-// 0 and 1 and returns another number between 0 and 1.
-                    easing: function (t) { return t; }
                 });
                 i++;
-            }, 200);
+
+                console.log('duration ' + baseDurationOfFlyToAction/distanceAdjustmentMultiplyer)
+            // }, baseDurationOfFlyToAction * distanceAdjustmentMultiplyer);
+            }, baseDurationOfFlyToAction);
         });
     }
   }

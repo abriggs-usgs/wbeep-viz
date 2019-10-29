@@ -1,64 +1,65 @@
 export default {
     michaelData: {
         "type": "FeatureCollection",
-        "features": [{
-            "type": "Feature",
-            "geometry": {
-                "type": "LineString",
-                "coordinates": [
-                    [-86.6, 17.8],
-                    [-86.9, 18.1],
-                    [-86.8, 18.4]
-                ]
-            },
-            "properties": {
-                "STORMNUM": 14,
-                "STORMTYPE": "LO",
-                "SS": 0
-            }
-        },
+        "features": [
+        // {
+        //     "type": "Feature",
+        //     "geometry": {
+        //         "type": "LineString",
+        //         "coordinates": [
+        //             [-86.6, 17.8],
+        //             [-86.9, 18.1],
+        //             [-86.8, 18.4]
+        //         ]
+        //     },
+        //     "properties": {
+        //         "STORMNUM": 14,
+        //         "STORMTYPE": "LO",
+        //         "SS": 0
+        //     }
+        // },
+        //     {
+        //         "type": "Feature",
+        //         "geometry": {
+        //             "type": "LineString",
+        //             "coordinates": [
+        //                 [-86.8, 18.4],
+        //                 [-86.4, 18.8]
+        //             ]
+        //         },
+        //         "properties": {
+        //             "STORMNUM": 14,
+        //             "STORMTYPE": "TD",
+        //             "SS": 0
+        //         }
+        //     },
+        //     {
+        //         "type": "Feature",
+        //         "geometry": {
+        //             "type": "LineString",
+        //             "coordinates": [
+        //                 [-86.4, 18.8],
+        //                 [-85.7, 19.1],
+        //                 [-85.5, 19.7],
+        //                 [-85.4, 20.2],
+        //                 [-85.1, 20.9]
+        //             ]
+        //         },
+        //         "properties": {
+        //             "STORMNUM": 14,
+        //             "STORMTYPE": "TS",
+        //             "SS": 0
+        //         }
+        //     },
             {
                 "type": "Feature",
                 "geometry": {
                     "type": "LineString",
                     "coordinates": [
-                        [-86.8, 18.4],
-                        [-86.4, 18.8]
-                    ]
-                },
-                "properties": {
-                    "STORMNUM": 14,
-                    "STORMTYPE": "TD",
-                    "SS": 0
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [-86.4, 18.8],
-                        [-85.7, 19.1],
-                        [-85.5, 19.7],
-                        [-85.4, 20.2],
-                        [-85.1, 20.9]
-                    ]
-                },
-                "properties": {
-                    "STORMNUM": 14,
-                    "STORMTYPE": "TS",
-                    "SS": 0
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [-85.1, 20.9],
-                        [-85.1, 21.7],
-                        [-85.2, 22.7],
-                        [-85.8, 23.7],
+                        // [-85.1, 20.9],
+                        // [-85.1, 21.7],
+                        // [-85.2, 22.7],
+                        // [-85.8, 23.7],
                         [-86.2, 24.6],
                         [-86.4, 25.6],
                         [-86.5, 26.6],
@@ -101,8 +102,8 @@ export default {
                         [-75, 37.3],
                         [-70.6, 39.1],
                         [-66.1, 41.1],
-                        [-61.5, 43.1],
-                        [-55.7, 44.8],
+                        // [-61.5, 43.1],
+                        // [-55.7, 44.8],
                         // [-48.2, 46.4],
                         // [-40.7, 47.6],
                         // [-33.1, 48.4],
