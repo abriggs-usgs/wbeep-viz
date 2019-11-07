@@ -3,7 +3,7 @@
     <HeaderUSWDSBanner />
     <HeaderUSGS />
     <router-view />
-    <FooterEmail />
+<!--    <FooterEmail />-->
     <FooterUSGS />
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script>
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
-    import FooterEmail from './components/FooterEmail'
+    // import FooterEmail from './components/FooterEmail'
     import FooterUSGS from './components/FooterUSGS'
 
     export default {
@@ -19,7 +19,7 @@
         components: {
             HeaderUSWDSBanner,
             HeaderUSGS,
-            FooterEmail,
+            // FooterEmail,
             FooterUSGS
         }
     }

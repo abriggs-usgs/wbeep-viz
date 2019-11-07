@@ -5,7 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import About from './components/About.vue'
-import MapBox from './components/MapBox.vue'
+import ComingSoonPlaceHolder from './components/ComingSoonPlaceHolder.vue'
 import uswds from 'uswds'
 import VueAnalytics from 'vue-analytics'
 
@@ -57,8 +57,8 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'MapBox',
-      component: MapBox
+      name: 'ComingSoonPlaceHolder',
+      component: ComingSoonPlaceHolder
     },
     {
       path: '/about',
