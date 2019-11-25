@@ -21,7 +21,8 @@
             HeaderUSGS,
             FooterEmail,
             FooterUSGS
-        }
+        },
+        data
     }
 </script>
 

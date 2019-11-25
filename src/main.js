@@ -54,7 +54,11 @@ Vue.use(uswds)
 Vue.use(VueRouter)
 Vue.use(browserDetect)
 
+import Error404 from './views/Error404'
+
 const router = new VueRouter({
+
+  base: '*',
   routes: [
     {
       path: '/',
@@ -65,9 +69,12 @@ const router = new VueRouter({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/*',
+      component: Error404
     }
   ],
-  mode: 'history'
 })
 
 Vue.use(VueAnalytics, {

@@ -32,7 +32,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .main-content {
     margin-left: auto;
     margin-right: auto;
