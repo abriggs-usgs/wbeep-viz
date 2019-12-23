@@ -1,4 +1,5 @@
 <template>
+  <div id="story-container">
   <div
     id="viz_container"
     @click.once="clickAnywhereToCloseMapInfoBox"
@@ -63,11 +64,18 @@
         <MglFullscreenControl position="bottom-right" />
         <MglGeolocateControl position="bottom-right" />
         <MapLayers />
+        <StoryBoard />
       </MglMap>
     </div>
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
           development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
+  </div>
+
+
+
+
+
   </div>
 </template>
 <script>
@@ -79,6 +87,7 @@
     import MapLayers from "./MapLayers";
     import { icon } from "@fortawesome/fontawesome-svg-core";
     import QuestionControl from "./QuestionControl";
+    import StoryBoard from "./StoryBoard";
 
     import {
         MglMap,
@@ -89,6 +98,7 @@
         MglAttributionControl
     } from "vue-mapbox";
     import mapStyles from "../assets/mapStyles/mapStyles";
+    import chapterCoordinates from "../assets/mapStory/chapterCoordinates";
 
     export default {
         name: "MapBox",
@@ -105,7 +115,8 @@
             MglAttributionControl,
             MapLegend,
             MapLayers,
-            QuestionControl
+            QuestionControl,
+            StoryBoard
         },
         props: {
             isInternetExplorer: {
@@ -170,6 +181,7 @@
                 setTimeout(() => {
                     this.isLoading = false;
                 }, 200);
+
 
                 //Create elements and give them specific ids
                 //Div that the map uses to display things fullscreen
@@ -369,6 +381,18 @@
   $border: 1px solid #fff;
   $borderGray: 1px solid rgb(100, 100, 100);
 
+#story-container {
+  max-height: 400px;
+  display: flex;
+
+  #viz_container {
+    flex: 1;
+  }
+  #story-chapters-container {
+    flex: 1;
+    overflow-y: scroll;
+  }
+
   #overlay {
     position: fixed; /* Sit on top of the page content */
     display: none; /* Hidden by default */
@@ -453,23 +477,15 @@
     height: 100%;
     margin: 0;
     outline: none;
-    border: none;
-    border-left: $borderGray;
+    border-style: none;
     &:hover{
       background: #00bf26;
       color: #fff;
     }
   }
 
-  /* override USWDS style to prevent title from wrapping too soon */
-  .title-text {
-    margin-left: 1.5rem;
-    padding: 0.25rem;
-  }
-
   #mapContainer {
     position: relative;
-    height: 80vh;
     min-height: 550px;
     display: flex;
     flex-direction: column;
@@ -487,6 +503,7 @@
       height: auto;
     }
   }
+}
 </style>
 <style lang="scss">
   $color: #fff;

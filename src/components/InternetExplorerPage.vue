@@ -9,7 +9,8 @@
       old versions of Internet Explorer, and while Internet Explorer 11 (the latest version) is still supported for security updates,
       compatibility fixes, and technical support, it is becoming increasingly difficult, time consuming, and costly
       to maintain backward compatibility with this aging browser.
-    </p><p>
+    </p>
+    <p>
       In order to bring you &mdash; and the rest of the internet audience &mdash; the best possible user experience,
       the {{ title }} application no longer offers support for any version of Internet Explorer.
     </p>
