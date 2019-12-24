@@ -113,6 +113,12 @@
     export default {
         name: "StoryBoard",
         inject: ["mapbox", "map", "actions"],
+        props: {
+            map: {
+                type: Object,
+                required: true
+            }
+        },
         data() {
             return {
             };

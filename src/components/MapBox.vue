@@ -20,7 +20,7 @@
       v-if="!isInternetExplorer"
       id="mapContainer"
     >
-
+      <div id="map-section">
         <MapSubtitle
           :is-about-map-info-box-open="isAboutMapInfoBoxOpen"
           @clickedInfoIcon="toggleMapInfoBox()"
@@ -46,7 +46,6 @@
           :max-bounds="maxBounds"
           @load="onMapLoaded"
         >
-          <div id="map-section">
           <MglAttributionControl
             position="bottom-right"
             :compact="false"
@@ -65,13 +64,11 @@
           <MglFullscreenControl position="bottom-right" />
           <MglGeolocateControl position="bottom-right" />
           <MapLayers />
-          </div>
-          <div id="story-section">
-            <StoryBoard />
-          </div>
         </MglMap>
-
-
+      </div>
+      <div id="story-section">
+        <StoryBoard :map="map" />
+      </div>
     </div>
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
           development version of the application. To find the code controlling this, search for 'zoom level display' -->
@@ -98,7 +95,7 @@
         MglAttributionControl
     } from "vue-mapbox";
     import mapStyles from "../assets/mapStyles/mapStyles";
-
+    import chapterCoordinates from "../assets/mapStory/chapterCoordinates";
 
     export default {
         name: "MapBox",
@@ -143,7 +140,8 @@
                 legendTitle: "Latest Natural Water Storage",
                 isLoading: true,
                 isAboutMapInfoBoxOpen: true,
-                isFirstClick: true
+                isFirstClick: true,
+                map: null
             };
         },
         methods: {
@@ -161,8 +159,8 @@
                 }
             },
             onMapLoaded(event) {
-                let map = event.map; // This gives us access to the map as an object but only after the map has loaded.
-
+                this.map = event.map; // This gives us access to the map as an object but only after the map has loaded.
+let map = this.map;
                 // We need to get the global Google Analytics (GA) plugin object 'this.$ga' into this scope, so let's make
                 // a local variable and assign our GA event tracking method to that.
                 let googleAnalytics = this.runGoogleAnalytics;
@@ -458,7 +456,7 @@
     }
   }
 
-  #mapgl {
+  #mapContainer {
     position: relative;
     min-height: 200px;
     max-height: 400px;
