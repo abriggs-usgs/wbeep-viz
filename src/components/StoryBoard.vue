@@ -1,7 +1,12 @@
 <template>
   <div id="story-chapters-container">
     <div id="features">
-      <section id="baker" class="active" @click="moveTolocation()" v-on:mouseover="moveTolocation()">
+      <section
+        id="baker"
+        class="active"
+        @click="moveTolocation()"
+        @mouseover="moveTolocation()"
+      >
         <h3>221b Baker St.</h3>
         <p>
           November 1895. London is shrouded in fog and Sherlock Holmes and
@@ -79,7 +84,10 @@
           plans in order to pay off his debts.
         </p>
       </section>
-      <section id="charing-cross" @click="moveTolocation()">
+      <section
+        id="charing-cross"
+        @click="moveTolocation()"
+      >
         <h3>Charing Cross Hotel</h3>
         <p>
           Walter writes to Oberstein and convinces him to meet in the smoking
@@ -89,25 +97,28 @@
         </p>
         <small id="citation">
           Adapted from
-          <a href="http://www.gutenberg.org/files/2346/2346-h/2346-h.htm"
-          >Project Gutenberg</a
-          >
+          <a
+            href="http://www.gutenberg.org/files/2346/2346-h/2346-h.htm"
+          >Project Gutenberg</a>
         </small>
       </section>
     </div>
   </div>
 </template>
 <script>
+    import Mapbox from "mapbox-gl";
+    import { MglMap } from "vue-mapbox";
     import chapterCoordinates from "../assets/mapStory/chapterCoordinates";
 
     export default {
-        name: "MapLayers",
+        name: "StoryBoard",
         inject: ["mapbox", "map", "actions"],
         data() {
             return {
             };
         },
         mounted() {
+            console.log('this map ', this.map)
         },
         methods: {
             moveTolocation() {
@@ -145,6 +156,21 @@
                         break;
                     }
                 }
+            },
+            createCustomControl() {
+                class customControl {
+                    onAdd(map) {
+                        this.map = map;
+
+                        return this.control;
+                    }
+                    onRemove() {
+                        this.control.parentNode.removeChild(this.control);
+                        this.map = undefined;
+                    }
+                }
+                const myCustomControl = new customControl();
+                this.map.addControl(myCustomControl, "top-right");
             }
         }
     };

@@ -1,5 +1,4 @@
 <template>
-  <div id="story-container">
   <div
     id="viz_container"
     @click.once="clickAnywhereToCloseMapInfoBox"
@@ -21,61 +20,62 @@
       v-if="!isInternetExplorer"
       id="mapContainer"
     >
-      <MapSubtitle
-        :is-about-map-info-box-open="isAboutMapInfoBoxOpen"
-        @clickedInfoIcon="toggleMapInfoBox()"
-        @clickedExit="toggleMapInfoBox()"
-      />
-      <MapAvailableDataDate />
-      <MapLegend
-        :legend-title="legendTitle"
-      />
-      <MglMap
-        id="mapgl"
-        :container="container"
-        :map-style="mapStyle"
-        :zoom="zoom"
-        :min-zoom="minZoom"
-        :max-zoom="maxZoom"
-        :center="center"
-        :pitch="pitch"
-        :bearing="bearing"
-        :pitch-with-rotate="false"
-        :drag-rotate="false"
-        :touch-zoom-rotate="false"
-        :max-bounds="maxBounds"
-        @load="onMapLoaded"
-      >
-        <MglAttributionControl
-          position="bottom-right"
-          :compact="false"
-          custom-attribution="© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-        />
 
-        <MglNavigationControl
-          position="top-right"
-          :show-compass="false"
+        <MapSubtitle
+          :is-about-map-info-box-open="isAboutMapInfoBoxOpen"
+          @clickedInfoIcon="toggleMapInfoBox()"
+          @clickedExit="toggleMapInfoBox()"
         />
-        <QuestionControl />
-        <MglScaleControl
-          position="bottom-right"
-          unit="imperial"
+        <MapAvailableDataDate />
+        <MapLegend
+          :legend-title="legendTitle"
         />
-        <MglFullscreenControl position="bottom-right" />
-        <MglGeolocateControl position="bottom-right" />
-        <MapLayers />
-        <StoryBoard />
-      </MglMap>
+        <MglMap
+          id="mapgl"
+          :container="container"
+          :map-style="mapStyle"
+          :zoom="zoom"
+          :min-zoom="minZoom"
+          :max-zoom="maxZoom"
+          :center="center"
+          :pitch="pitch"
+          :bearing="bearing"
+          :pitch-with-rotate="false"
+          :drag-rotate="false"
+          :touch-zoom-rotate="false"
+          :max-bounds="maxBounds"
+          @load="onMapLoaded"
+        >
+          <div id="map-section">
+          <MglAttributionControl
+            position="bottom-right"
+            :compact="false"
+            custom-attribution="© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+          />
+
+          <MglNavigationControl
+            position="top-right"
+            :show-compass="false"
+          />
+          <QuestionControl />
+          <MglScaleControl
+            position="bottom-right"
+            unit="imperial"
+          />
+          <MglFullscreenControl position="bottom-right" />
+          <MglGeolocateControl position="bottom-right" />
+          <MapLayers />
+          </div>
+          <div id="story-section">
+            <StoryBoard />
+          </div>
+        </MglMap>
+
+
     </div>
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
           development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
-  </div>
-
-
-
-
-
   </div>
 </template>
 <script>
@@ -98,7 +98,7 @@
         MglAttributionControl
     } from "vue-mapbox";
     import mapStyles from "../assets/mapStyles/mapStyles";
-    import chapterCoordinates from "../assets/mapStory/chapterCoordinates";
+
 
     export default {
         name: "MapBox",
@@ -381,32 +381,6 @@
   $border: 1px solid #fff;
   $borderGray: 1px solid rgb(100, 100, 100);
 
-#story-container {
-  max-height: 400px;
-  display: flex;
-
-  #viz_container {
-    flex: 1;
-  }
-  #story-chapters-container {
-    flex: 1;
-    overflow-y: scroll;
-  }
-
-  #overlay {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
-  }
-
   .header-container {
     background-color: #fff;
   }
@@ -484,25 +458,20 @@
     }
   }
 
-  #mapContainer {
+  #mapgl {
     position: relative;
-    min-height: 550px;
+    min-height: 200px;
+    max-height: 400px;
     display: flex;
-    flex-direction: column;
-  }
 
-  @media screen and (min-width: 600px) and (min-height: 850px) {
-    #viz_container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+    #map-section {
+      flex: 3;
     }
 
-    #mapContainer {
+    #story-section {
       flex: 1;
-      height: auto;
+      overflow-y: auto;
     }
-  }
 }
 </style>
 <style lang="scss">
