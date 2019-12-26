@@ -28,16 +28,23 @@ export default {
             openmaptiles: {
                 type: 'vector',
                 'tiles': ['https://maptiles-prod-website.s3-us-west-2.amazonaws.com/openmaptiles/baselayers/{z}/{x}/{y}.pbf'],
-                'minzoom': 2,
-                'maxzoom': 6
+                'minzoom': 0,
+                'maxzoom': 14
             },
             hillshade: {
                 type: 'raster',
                 'tiles': ['https://maptiles-prod-website.s3-us-west-2.amazonaws.com/openmaptiles/omthillshade/{z}/{x}/{y}.png'],
-                'minzoom': 2,
+                'minzoom': 0,
                 'maxzoom': 12,
                 'tileSize': 256
-            }
+            },
+            monitoring_location_summary: {
+                type: 'geojson',
+                data: 'http://maptiles-prod-website.s3-us-west-2.amazonaws.com/geojson/delaware_site_summary.geojson',
+                cluster: true,
+                clusterMaxZoom: 8,
+                clusterRadius: 50
+            },
         },
         'sprite': '',
         'glyphs': 'https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf',
@@ -376,7 +383,127 @@ export default {
                 'source-layer': 'place',
                 'type': 'symbol',
                 'showButtonLayerToggle': false
-            }
+            },
+            {
+                'id': 'monitoring-location-clusters',
+                'type': 'circle',
+                'source': 'monitoring_location_summary',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'filter': ['has', 'point_count'],
+                'paint': {
+                    'circle-color': [
+                        'step',
+                        ['get', 'point_count'],
+                        'rgba(0, 87, 239, .25)', 100, // if less than 101 monitoring locations in the cluster, make it this color
+                        'rgba(0, 106, 210, .5)', 750, // if there is less than 751 monitoring locations in the cluster make it this color
+                        'rgba(0, 49, 74.9, .5)'
+                    ],
+                    'circle-radius': [
+                        'step',
+                        ['get', 'point_count'],
+                        20, 100, // if there are less than 101 monitoring locations in the cluster, make it 20 px in radius
+                        30, 750,
+                        40
+                    ]
+                },
+                'minzoom': 3,
+                'maxzoom': 23,
+                'showButtonLayerToggle': false,
+                'showButtonStreamToggle': false,
+                'showButtonProjectSpecific': false,
+                'inLegend': false
+            },
+            {
+                'id': 'monitoring-location-cluster-count',
+                'type': 'symbol',
+                'source': 'monitoring_location_summary',
+                'filter': ['has', 'point_count'],
+                'layout': {
+                    'visibility': 'visible',
+                    'text-field': '{point_count_abbreviated}',
+                    'text-font': [
+                        'Roboto Regular'
+                    ],
+                    'text-size': 12,
+                    'symbol-placement': 'point'
+                },
+                'paint': {
+                    'text-color': 'rgba(0,0,0, 1)',
+                    'text-halo-width': 1,
+                    'text-halo-blur': 1,
+                    'text-halo-color': 'rgba(255,255,255, 1)',
+                },
+                'minzoom': 3,
+                'maxzoom': 23,
+                'showButtonLayerToggle': false,
+                'showButtonStreamToggle': false,
+                'showButtonProjectSpecific': false,
+                'inLegend': false
+            },
+            {
+                'id': 'monitoring-location-unclustered-point',
+                'type': 'circle',
+                'source': 'monitoring_location_summary',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'filter': ['!', ['has', 'point_count']],
+                'paint': {
+                    'circle-color':  {
+                        'property': 'nobsBin',
+                        'type': 'categorical',
+                        'stops': [
+                            ['1-10', '#A1F7FA'],
+                            ['10-100','#6A6EE7'],
+                            ['100-1000','#C239D4'],
+                            ['1000+','#C10F32']
+                        ]
+                    },
+                    'circle-radius': 4,                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#11b4da'
+                },
+                'minzoom': 3,
+                'maxzoom': 23,
+                'showButtonLayerToggle': false,
+                'showButtonStreamToggle': false,
+                'showButtonProjectSpecific': false,
+                'inLegend': true
+            },
+            {
+                'id': 'site names',
+                'type': 'symbol',
+                'source': 'monitoring_location_summary',
+                'layout': {
+                    'visibility': 'none',
+                    'text-field': '{site_id} | {n_obs} | {latitude} | {longitude} | {source}',
+                    'text-font': [
+                        'Roboto Regular'
+                    ],
+                    'text-size': 12,
+                    'symbol-placement': 'point',
+                    'text-line-height': 1.2,
+                    'text-justify': 'center',
+                    'text-anchor': 'center',
+                    'text-offset': [
+                        0,
+                        -1.5
+                    ]
+                },
+                'paint': {
+                    'text-color': 'rgba(0, 0, 0, 0.5)',
+                    'text-halo-width': 1,
+                    'text-halo-blur': 1,
+                    'text-halo-color': 'rgba(255,255,255, 1)',
+                },
+                'minzoom': 3,
+                'maxzoom': 23,
+                'showButtonLayerToggle': false,
+                'showButtonStreamToggle': false,
+                'showButtonProjectSpecific': true,
+                'inLegend': false
+            },
         ]
     }
 };

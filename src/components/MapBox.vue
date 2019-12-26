@@ -95,7 +95,6 @@
         MglAttributionControl
     } from "vue-mapbox";
     import mapStyles from "../assets/mapStyles/mapStyles";
-    import chapterCoordinates from "../assets/mapStory/chapterCoordinates";
 
     export default {
         name: "MapBox",
@@ -131,7 +130,7 @@
                 container: "map",
                 zoom: 3,
                 minZoom: 2,
-                maxZoom: 6,
+                maxZoom: 15,
                 center: [-95.7129, 37.0902],
                 pitch: 0, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
@@ -459,7 +458,7 @@ let map = this.map;
   #mapContainer {
     position: relative;
     min-height: 200px;
-    max-height: 400px;
+    max-height: 1080px;
     display: flex;
 
     #map-section {
