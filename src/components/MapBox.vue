@@ -21,15 +21,6 @@
       id="mapContainer"
     >
       <div id="map-section">
-        <MapSubtitle
-          :is-about-map-info-box-open="isAboutMapInfoBoxOpen"
-          @clickedInfoIcon="toggleMapInfoBox()"
-          @clickedExit="toggleMapInfoBox()"
-        />
-        <MapAvailableDataDate />
-        <MapLegend
-          :legend-title="legendTitle"
-        />
         <MglMap
           id="mapgl"
           :container="container"
@@ -79,7 +70,6 @@
     import LoadingScreen from './LoadingScreen';
     import InternetExplorerPage from "./InternetExplorerPage";
     import MapSubtitle from "./MapSubtitle";
-    import MapAvailableDataDate from "./MapAvailableDataDate";
     import MapLegend from "./MapLegend";
     import MapLayers from "./MapLayers";
     import { icon } from "@fortawesome/fontawesome-svg-core";
@@ -102,14 +92,11 @@
             LoadingScreen,
             InternetExplorerPage,
             MglMap,
-            MapSubtitle,
-            MapAvailableDataDate,
             MglNavigationControl,
             MglGeolocateControl,
             MglFullscreenControl,
             MglScaleControl,
             MglAttributionControl,
-            MapLegend,
             MapLayers,
             QuestionControl,
             StoryBoard

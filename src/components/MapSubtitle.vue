@@ -2,7 +2,7 @@
   <div id="subTitleContainer">
     <div id="subtitle">
       <div id="subtitleText">
-        <p>An Indicator of Natural Water Storage</p>
+        <p>Monitoring locations of the Delaware Basin</p>
       </div>
       <div id="subtitleInfoButton">
         <a

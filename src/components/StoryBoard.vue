@@ -6,10 +6,10 @@
         :key="chapter.id"
     >
       <section
-        id="chapter.id"
-        class="chapter.class"
-        @click="moveToLocation(chapter.flyToCommands)"
-        @mouseover="moveToLocation(chapter.flyToCommands)"
+        :id="chapter.id"
+        :class="chapter.class"
+        @click="moveToLocation(chapter.flyToCommands, chapter.id)"
+        @mouseover="moveToLocation(chapter.flyToCommands, chapter.id)"
       >
         <h3>{{ chapter.title }}</h3>
         <p>
@@ -37,8 +37,13 @@
             };
         },
         methods: {
-            moveToLocation(flyToComands ) {
-                this.map.flyTo(flyToComands);
+            moveToLocation(flyToCommands, elementId) {
+                let allActiveSectionElements = document.querySelectorAll("section.active");
+                [...allActiveSectionElements].forEach((selection) => {
+                    selection.setAttribute('class', '');
+                })
+                document.getElementById(elementId).setAttribute('class', 'active');
+                this.map.flyTo(flyToCommands);
             }
         }
     };
@@ -60,6 +65,5 @@
   }
   section:last-child {
     border-bottom: none;
-    margin-bottom: 200px;
   }
 </style>
