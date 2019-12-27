@@ -1,5 +1,6 @@
 <template>
   <div class="usa-prose provisional-statement">
+    <button @click="mapLog()">get the map</button>
     <div v-show="!isFullProvisionalStatementShowing">
       <div class="statement-condensed">
         <span>
@@ -40,6 +41,12 @@
         data() {
             return {
                isFullProvisionalStatementShowing: false
+            }
+        },
+        computed: {
+            map() {
+                console.log('in provisional and this is map before', this.$store.map)
+                return this.map;
             }
         },
         methods: {

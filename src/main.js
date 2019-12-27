@@ -1,8 +1,9 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
-import router from "./router";
+import router from './router';
+import { store } from './store/store'
 import App from './App.vue';
 import uswds from 'uswds';
 import browserDetect from 'vue-browser-detect-plugin';
@@ -21,8 +22,8 @@ import { faWater } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
-import { faQuestion} from "@fortawesome/free-solid-svg-icons";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion} from '@fortawesome/free-solid-svg-icons';
+import { faBackward } from '@fortawesome/free-solid-svg-icons';
 
 // social icons
 import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
@@ -59,7 +60,6 @@ library.add(faInstagram);
 Vue.config.productionTip = false;
 Vue.use(uswds);
 Vue.use(browserDetect);
-
 
 // create a unique ID that can be used to identify user sessions
 // Note: this section is borrowed code with Public Domain/MIT licensing
@@ -116,5 +116,6 @@ Vue.use(VueAnalytics, {
 
 const app = new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app');

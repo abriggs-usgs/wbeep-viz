@@ -57,3 +57,15 @@
         }
     };
 </script>
+
+<style scoped lang="scss">
+  .icon-map-control-question {
+    transition: transform 1s;
+    transform: skew(0deg, 0deg);
+  }
+
+  .icon-map-control-question:hover {
+    transition: transform 1s;
+    transform: skew(-15deg, 10deg);
+  }
+</style>
