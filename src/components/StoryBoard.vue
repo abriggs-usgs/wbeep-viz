@@ -1,9 +1,9 @@
 <template>
   <div id="story-chapters-container">
     <div
-        id="features"
-        v-for="chapter in mapStory.chapters"
-        :key="chapter.id"
+      v-for="chapter in mapStory.chapters"
+      id="features"
+      :key="chapter.id"
     >
       <section
         :id="chapter.id"
@@ -16,7 +16,6 @@
           {{ chapter.content }}
         </p>
       </section>
-
     </div>
   </div>
 </template>
@@ -25,12 +24,6 @@
 
     export default {
         name: "StoryBoard",
-        props: {
-            map: {
-                type: Object,
-                default: null
-            }
-        },
         data() {
             return {
                 mapStory: mapStory
@@ -43,7 +36,7 @@
                     selection.setAttribute('class', '');
                 })
                 document.getElementById(elementId).setAttribute('class', 'active');
-                this.map.flyTo(flyToCommands);
+                this.$store.map.flyTo(flyToCommands);
             }
         }
     };

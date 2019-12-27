@@ -126,9 +126,12 @@
                 legendTitle: "Latest Natural Water Storage",
                 isLoading: true,
                 isAboutMapInfoBoxOpen: true,
-                isFirstClick: true,
-                map: null
+                isFirstClick: true
+
             };
+        },
+        created() {
+            this.map = null;
         },
         methods: {
             runGoogleAnalytics(eventName, action, label) {
@@ -146,21 +149,22 @@
             },
             onMapLoaded(event) {
                 this.map = event.map; // This gives us access to the map as an object but only after the map has loaded.
-let map = this.map;
+                this.$store.map = event.map; // add the map to the Vuex store so that we can use it in other components
+
                 // We need to get the global Google Analytics (GA) plugin object 'this.$ga' into this scope, so let's make
                 // a local variable and assign our GA event tracking method to that.
                 let googleAnalytics = this.runGoogleAnalytics;
 
                 //This solves the mysterious whitespace by resizing the map to the correct size.
-                map.resize();
+                this.map.resize();
 
                 // pinch to zoom for touch devices
-                map.touchZoomRotate.enable();
+                this.map.touchZoomRotate.enable();
                 // disable the rotation functionality, but keep pinch to zoom
-                map.touchZoomRotate.disableRotation();
+                this.map.touchZoomRotate.disableRotation();
 
                 // Once map is loaded, zoom in a bit more so that the map neatly fills the screen.
-                map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]);
+                this.map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]);
                 //set timeout to make sure the fitbounds is completely done before fadeaway
                 setTimeout(() => {
                     this.isLoading = false;
@@ -319,7 +323,7 @@ let map = this.map;
                 // next section controls the HRU hover effect
                 let hoveredHRUId = this.hoveredHRUId;
 
-                map.on("mousemove", "HRUs", function(e) {
+                this.map.on("mousemove", "HRUs", function(e) {
                     if (e.features.length > 0) {
                         if (hoveredHRUId) {
                             map.setFeatureState(
@@ -334,7 +338,7 @@ let map = this.map;
                         );
                     }
                 });
-                map.on("mouseleave", "HRUS Fill Colors", function() {
+                this.map.on("mouseleave", "HRUS Fill Colors", function() {
                     if (hoveredHRUId) {
                         map.setFeatureState(
                                 { source: "HRU", sourceLayer: "hrus", id: hoveredHRUId },
@@ -343,7 +347,7 @@ let map = this.map;
                     }
                     hoveredHRUId = null;
                 });
-                
+                let map = this.map;
                 // Next section adds the current zoom level display to the map for development purposes.
                 // The zoom level display should only show in 'development' versions of the application
                 if (process.env.VUE_APP_ADD_ZOOM_LEVEL_DISPLAY && process.env.VUE_APP_ADD_ZOOM_LEVEL_DISPLAY === 'true') {
