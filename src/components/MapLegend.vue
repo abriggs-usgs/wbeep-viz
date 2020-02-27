@@ -1,7 +1,7 @@
 <template>
   <div id="legendContainer">
     <div
-      v-show="!hidden"
+      v-show="!isLegendHidden"
       id="tabs"
     >
       <div
@@ -28,7 +28,7 @@
           @click="runGoogleAnalytics('legend', 'click', 'user clicked info icon'), modalToggle()"
         >
           <font-awesome-icon
-            v-if="!infoShowing"
+            v-if="!isInfoShowing"
             icon="info"
           />
           <font-awesome-icon
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div
-      v-show="!hidden && !infoShowing"
+      v-show="!isLegendHidden && !isInfoShowing"
       id="legend"
     >
       <div id="legendTitle">
@@ -48,11 +48,11 @@
       <div id="keysAndText" />
     </div>
     <LegendModal
-      v-show="infoShowing && !hidden"
+      v-show="isInfoShowing && !isLegendHidden"
       @clickedX="modalToggle()"
     />
     <div
-      v-show="hidden"
+      v-show="isLegendHidden"
       id="collapsedLegend"
     >
       <div id="collaspedLegendText">
@@ -91,12 +91,9 @@ export default {
   data() {
     return {
       legend: null,
-      hidden: false,
-      infoShowing: false
+      isLegendHidden: false,
+      isInfoShowing: false
     };
-  },
-  mounted() {
-    this.createLegend();
   },
   methods: {
     runGoogleAnalytics(eventName, action, label) {
@@ -104,43 +101,45 @@ export default {
       this.$ga.event(eventName, action, label);
     },
     legendToggle(){
-      this.hidden = !this.hidden;
+      this.isLegendHidden = !this.isLegendHidden;
     },
     modalToggle(){
-      this.infoShowing = !this.infoShowing;
+      this.isInfoShowing = !this.isInfoShowing;
     },
     createLegend() {
-      // get the style layers from the map styles object
-      let styleLayers = mapStyles.style.layers;
-      let legendColorValues = [];
-      let styleSheetCategories = [];
-      let selectedLayerStyle = null;
-      // look through the styles layers to find the one with the Hydrological Response Unit fill colors
-      for (let index = 0; index < styleLayers.length; index++) {
-        if (styleLayers[index].id === "HRUs") {
-          // save the layer style we want, so we can use it later
-          selectedLayerStyle = styleLayers[index];
-          // Get the fill color values and names then put them in separate lists
-          let styleSheetColorStops =
-            styleLayers[index].paint["fill-color"].stops;
-          let styleSheetColorLabel = null;
-          for (let index = 0; index < styleSheetColorStops.length; index++) {
-            // Make a label for the blank and missing data
+      const map = this.$store.map;
 
-            styleSheetColorLabel = styleSheetColorStops[index][0];
-            legendColorValues.push(styleSheetColorStops[index][1]);
-            styleSheetCategories.push(styleSheetColorLabel);
-          }
-        }
-      }
+      const hruStyleObjectFromStyleSheet =  mapStyles.style.layers.filter(function(styleObject) {
+          return styleObject.id === 'HRUs'
+        });
+
+      const hruStyleObjectFromMemory = map.getStyle().layers.filter(function(styleObject) {
+          return styleObject.id === 'HRUs'
+      });
+      console.log('entires ' + JSON.stringify(Object.entries(hruStyleObjectFromStyleSheet)))
+
+
+
+      let colorsAndValuesForLegend = Object.entries(hruStyleObjectFromStyleSheet.legendText);
+
+      let legendColorValues = Object.values(hruStyleObjectFromStyleSheet);
+      let styleSheetCategories = Object.keys(hruStyleObjectFromStyleSheet);
+      let selectedLayerStyle = null;
+
+
 
       let legend = this.legend;
       legend = document.getElementById("keysAndText");
-
+      // Remove any keys and values that might be in the legend so it will start fresh and clean
+      while (legend.firstChild) {
+          legend.removeChild(legend.lastChild);
+      }
+      // Start adding new legend keys and values
       for (let index = 0; index < styleSheetCategories.length; index++) {
         let legendMainText = styleSheetCategories[index];
         let color = legendColorValues[index];
         let item = document.createElement("div");
+        item.className = "legend-values-n-keys";
         let keyContainer = document.createElement("div");
         let textContainer = document.createElement("div");
         let key = document.createElement("div");

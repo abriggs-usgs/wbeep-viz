@@ -52,14 +52,14 @@ export default {
             },
             {
                 'id': 'HRUs',
-                'type': 'fill',
+                'type': 'fill-extrusion',
                 'source': 'HRU',
                 'source-layer': 'hrus',
                 'layout': {
                     'visibility': 'visible'
                 },
                 'paint': {
-                    'fill-color': {
+                    'fill-extrusion-color': {
                         'property': 'value',
                         'type': 'categorical',
                         'stops': [
@@ -70,11 +70,18 @@ export default {
                             ['very low','#967a4a']
                         ]
                     },
-                    'fill-opacity': ['case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        0.7,
-                        1
-                    ]
+                    'fill-extrusion-height': {
+                        property: 'value',
+                        type: 'categorical',
+                        stops: [
+                            ['very high', 0],
+                            ['high', 0],
+                            ['average', 0],
+                            ['low', 0],
+                            ['very low', 0]
+                        ]
+                    },
+                    'fill-extrusion-opacity': 1
                 },
                 'showButtonLayerToggle': false,
                 'legendText': {

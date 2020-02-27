@@ -28,6 +28,7 @@
       <MapAvailableDataDate />
       <MapLegend
         :legend-title="legendTitle"
+        ref="mapLegend"
       />
       <MglMap
         id="mapgl"
@@ -65,6 +66,11 @@
         <MapLayers />
       </MglMap>
     </div>
+    <button
+      @click="toggle3D"
+    >
+      {{ threeDButtonText }}
+    </button>
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
           development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
@@ -123,7 +129,7 @@
                 container: "map",
                 zoom: 2,
                 minZoom: 2,
-                maxZoom: 5.99,
+                maxZoom: 15,
                 center: [-95.7129, 37.0902],
                 pitch: 0, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
@@ -132,10 +138,82 @@
                 legendTitle: "Latest Natural Water Storage",
                 isLoading: true,
                 isAboutMapInfoBoxOpen: true,
-                isFirstClick: true
+                isFirstClick: true,
+                is3D: false,
+                threeDButtonText: '3D! Let\'s Do It'
             };
         },
+        created() {
+            this.map = null; // This will allow access to the map object in later methods
+        },
         methods: {
+            toggle3D() {
+                const map = this.map;
+                // If map is already in 3D mode, turn it off. Otherwise, get ready to turn it on by tilting the map.
+                let pitch = this.is3D ? 0 : 60;
+                this.threeDButtonText = this.is3D ? '3D! Let\'s Do It Again' : 'back to flat';
+                map.flyTo({
+                        center: this.map.getCenter(),
+                        pitch: pitch
+                    });
+                if (!this.is3D) {
+                    map.setPaintProperty('HRUs', 'fill-extrusion-color',
+                            {
+                                'property': 'value',
+                                'type': 'categorical',
+                                'stops': [
+                                    ['very high','#eaf032'],
+                                    ['high','#b1e10b'],
+                                    ['average','#d3111e'],
+                                    ['low', '#BDAD9D'],
+                                    ['very low','#3b0896']
+                                ]
+                            }
+                    );
+                    this.$refs.mapLegend.createLegend();
+                } else {
+                    map.setPaintProperty('HRUs', 'fill-extrusion-color',
+                            {
+                                'property': 'value',
+                                'type': 'categorical',
+                                'stops': [
+                                    ['very high','#1C2040'],
+                                    ['high','#337598'],
+                                    ['average','#C8D3BA'],
+                                    ['low', '#BDAD9D'],
+                                    ['very low','#967a4a']
+                                ]
+                            }
+                    );
+                    this.$refs.mapLegend.createLegend();
+                }
+
+                // 'fill-extrusion-color': {
+                //     'property': 'value',
+                //             'type': 'categorical',
+                //             'stops': [
+                //         ['very high','#1C2040'],
+                //         ['high','#337598'],
+                //         ['average','#C8D3BA'],
+                //         ['low', '#BDAD9D'],
+                //         ['very low','#967a4a']
+                //     ]
+                // },
+                // 'fill-extrusion-height': {
+                //     property: 'value',
+                //             type: 'categorical',
+                //             stops: [
+                //         ['very high', 100000],
+                //         ['high', 75000],
+                //         ['average', 50000],
+                //         ['low', 25000],
+                //         ['very low',0]
+                //     ]
+                // },
+                // 'fill-extrusion-opacity': 1
+
+                this.is3D = !this.is3D;
+            },
             runGoogleAnalytics(eventName, action, label) {
                 this.$ga.set({ dimension2: Date.now() });
                 this.$ga.event(eventName, action, label);
@@ -150,8 +228,10 @@
                 }
             },
             onMapLoaded(event) {
-                let map = event.map; // This gives us access to the map as an object but only after the map has loaded.
-
+                this.map = event.map; // This gives us access to the map as an object but only after the map has loaded.
+                const map = this.map;
+                this.$store.map = event.map;
+                this.$refs.mapLegend.createLegend();
                 // We need to get the global Google Analytics (GA) plugin object 'this.$ga' into this scope, so let's make
                 // a local variable and assign our GA event tracking method to that.
                 let googleAnalytics = this.runGoogleAnalytics;

@@ -3,6 +3,7 @@ import "regenerator-runtime/runtime";
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import router from "./router";
+import { store } from './store/store'
 import App from './App.vue';
 import uswds from 'uswds';
 import browserDetect from 'vue-browser-detect-plugin';
@@ -116,5 +117,6 @@ Vue.use(VueAnalytics, {
 
 const app = new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app');
