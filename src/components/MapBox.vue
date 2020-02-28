@@ -27,8 +27,8 @@
       />
       <MapAvailableDataDate />
       <MapLegend
-        :legend-title="legendTitle"
         ref="mapLegend"
+        :legend-title="legendTitle"
       />
       <MglMap
         id="mapgl"

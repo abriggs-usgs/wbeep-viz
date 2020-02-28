@@ -84,13 +84,13 @@ export default {
                     'fill-extrusion-opacity': 1
                 },
                 'showButtonLayerToggle': false,
-                'legendText': {
-                    'very high': ['Very High'],
-                    'high': ['High'],
-                    'average': ['Normal'],
-                    'low': ['Low'],
-                    'very low': ['Very Low']
-                }
+                'legendText': [
+                    ['very high', 'Very High'] ,
+                    ['high', 'High'],
+                    ['average', 'Normal'],
+                    ['low', 'Low'],
+                    ['very low', 'Very Low']
+                ]
             },
             {
                 'filter': ['all', ['==', '$type', 'LineString'],
