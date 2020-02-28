@@ -4,11 +4,11 @@ export default {
             'property': 'value',
             'type': 'categorical',
             'stops': [
-                ['very high','#eaf032'],
-                ['high','#b1e10b'],
-                ['average','#d3111e'],
+                ['very high','#1C2040'],
+                ['high','#337598'],
+                ['average','#C8D3BA'],
                 ['low', '#BDAD9D'],
-                ['very low','#3b0896']
+                ['very low','#967a4a']
             ]
         },
         theme_neon_green: {

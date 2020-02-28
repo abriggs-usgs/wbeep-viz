@@ -249,9 +249,9 @@
         },
         methods: {
             updateButtonText() {
+                document.getElementById('refreshButton').style.backgroundColor='yellow';
                 if (this.refreshButtonText === 'use sliders to set 3D levels') {
                     this.refreshButtonText = 'refresh the map';
-                    document.getElementById('refreshButton').style.backgroundColor='yellow';
                 }
             },
             toggleTheme(selectedTheme) {
@@ -261,6 +261,8 @@
             },
             change3DValues() {
                 const map = this.map;
+                document.getElementById('refreshButton').style.backgroundColor='white';
+                this.refreshButtonText = 'use sliders to set 3D levels';
                 map.setPaintProperty('HRUs', 'fill-extrusion-height', {
                             property: 'value',
                             type: 'categorical',
@@ -312,6 +314,8 @@
                             }
                     );
                 }
+                this.refreshButtonText = 'use sliders to set 3D levels';
+                document.getElementById('refreshButton').style.backgroundColor='white';
                 this.is3D = !this.is3D;
             },
             runGoogleAnalytics(eventName, action, label) {
