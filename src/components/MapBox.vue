@@ -66,11 +66,94 @@
         <MapLayers />
       </MglMap>
     </div>
-    <button
-      @click="toggle3D"
-    >
-      {{ threeDButtonText }}
-    </button>
+    <div id="control-panel">
+      <div>
+        <range-slider
+          id="veryHigh"
+          v-model="veryHighValue"
+          class="slider"
+          min="0"
+          max="200000"
+          step="1000"
+        />
+        <span>Very High {{ veryHighValue }}</span>
+      </div>
+      <div>
+        <range-slider
+          id="high"
+          v-model="highValue"
+          class="slider"
+          min="0"
+          max="200000"
+          step="1000"
+        />
+        <span>High {{ highValue }}</span>
+      </div>
+      <div>
+        <range-slider
+          id="normal"
+          v-model="normalValue"
+          class="slider"
+          min="0"
+          max="200000"
+          step="1000"
+        />
+        <span>Normal {{ normalValue }}</span>
+      </div>
+      <div>
+        <range-slider
+          id="low"
+          v-model="lowValue"
+          class="slider"
+          min="0"
+          max="200000"
+          step="1000"
+        />
+        <span>Low {{ lowValue }}</span>
+      </div>
+      <div>
+        <range-slider
+          id="veryLow"
+          v-model="veryLowValue"
+          class="slider"
+          min="0"
+          max="200000"
+          step="1000"
+        />
+        <span>Very Low {{ veryLowValue }}</span>
+      </div>
+    </div>
+    <div id="three-d-buttons">
+      <button
+        v-show="is3D"
+        id="refreshButton"
+        @click="change3DValues()"
+      >
+        {{ refreshButtonText }}
+      </button>
+      <button
+        @click="toggle3D"
+      >
+        {{ threeDButtonText }}
+      </button>
+    </div>
+    <div id="theme-selection">
+      <button
+        @click="toggleTheme('theme_default')"
+      >
+        default theme
+      </button>
+      <button
+        @click="toggleTheme('theme_neon_green')"
+      >
+        neon green theme
+      </button>
+      <button
+        @click="toggleTheme('theme_purple')"
+      >
+        purple theme
+      </button>
+    </div>
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
           development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
@@ -83,8 +166,11 @@
     import MapAvailableDataDate from "./MapAvailableDataDate";
     import MapLegend from "./MapLegend";
     import MapLayers from "./MapLayers";
-    import { icon } from "@fortawesome/fontawesome-svg-core";
+    import {icon} from "@fortawesome/fontawesome-svg-core";
     import QuestionControl from "./QuestionControl";
+
+    import RangeSlider from 'vue-range-slider'
+    import 'vue-range-slider/dist/vue-range-slider.css'
 
     import {
         MglMap,
@@ -95,6 +181,7 @@
         MglAttributionControl
     } from "vue-mapbox";
     import mapStyles from "../assets/mapStyles/mapStyles";
+    import mapThemes from "../assets/mapThemes/mapThemes";
 
     export default {
         name: "MapBox",
@@ -111,7 +198,8 @@
             MglAttributionControl,
             MapLegend,
             MapLayers,
-            QuestionControl
+            QuestionControl,
+            RangeSlider
         },
         props: {
             isInternetExplorer: {
@@ -134,88 +222,100 @@
                 pitch: 0, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
                 hoveredHRUId: null,
-                maxBounds: [[-168.534393,-4.371744], [-19.832382,71.687625]], // The coordinates needed to make a bounding box for the continental United States.
+                maxBounds: [[-168.534393, -4.371744], [-19.832382, 71.687625]], // The coordinates needed to make a bounding box for the continental United States.
                 legendTitle: "Latest Natural Water Storage",
                 isLoading: true,
                 isAboutMapInfoBoxOpen: true,
                 isFirstClick: true,
                 is3D: false,
-                threeDButtonText: '3D! Let\'s Do It'
+                threeDButtonText: '3D! Let\'s Do It',
+                refreshButtonText: 'use sliders to set 3D levels',
+                veryHighValue: 100000,
+                highValue: 75000,
+                normalValue: 50000,
+                lowValue: 25000,
+                veryLowValue: 0
             };
+        },
+        watch: {
+            veryHighValue: function(value) {this.updateButtonText()},
+            highValue: function(value) {this.updateButtonText()},
+            normalValue: function(value) {this.updateButtonText()},
+            lowValue: function(value) {this.updateButtonText()},
+            veryLowValue: function(value) {this.updateButtonText()}
         },
         created() {
             this.map = null; // This will allow access to the map object in later methods
         },
         methods: {
+            updateButtonText() {
+                if (this.refreshButtonText === 'use sliders to set 3D levels') {
+                    this.refreshButtonText = 'refresh the map';
+                    document.getElementById('refreshButton').style.backgroundColor='yellow';
+                }
+            },
+            toggleTheme(selectedTheme) {
+                const map = this.map;
+                map.setPaintProperty('HRUs', 'fill-extrusion-color', mapThemes.themes[selectedTheme]);
+                this.$refs.mapLegend.createLegend();
+            },
+            change3DValues() {
+                const map = this.map;
+                map.setPaintProperty('HRUs', 'fill-extrusion-height', {
+                            property: 'value',
+                            type: 'categorical',
+                            stops: [
+                                ['very high', this.veryHighValue],
+                                ['high', this.highValue],
+                                ['average', this.normalValue],
+                                ['low', this.lowValue],
+                                ['very low', this.veryLowValue]
+                            ]
+                        }
+                );
+            },
             toggle3D() {
                 const map = this.map;
                 // If map is already in 3D mode, turn it off. Otherwise, get ready to turn it on by tilting the map.
                 let pitch = this.is3D ? 0 : 60;
                 this.threeDButtonText = this.is3D ? '3D! Let\'s Do It Again' : 'back to flat';
                 map.flyTo({
-                        center: this.map.getCenter(),
-                        pitch: pitch
-                    });
+                    center: this.map.getCenter(),
+                    pitch: pitch
+                });
+
                 if (!this.is3D) {
-                    map.setPaintProperty('HRUs', 'fill-extrusion-color',
-                            {
-                                'property': 'value',
-                                'type': 'categorical',
-                                'stops': [
-                                    ['very high','#eaf032'],
-                                    ['high','#b1e10b'],
-                                    ['average','#d3111e'],
-                                    ['low', '#BDAD9D'],
-                                    ['very low','#3b0896']
-                                ]
-                            }
+                    map.setPaintProperty('HRUs', 'fill-extrusion-height', {
+                          property: 'value',
+                          type: 'categorical',
+                          stops: [
+                              ['very high', this.veryHighValue],
+                              ['high', this.highValue],
+                              ['average', this.normalValue],
+                              ['low', this.lowValue],
+                              ['very low', this.veryLowValue]
+                          ]
+                      }
                     );
-                    this.$refs.mapLegend.createLegend();
+
                 } else {
-                    map.setPaintProperty('HRUs', 'fill-extrusion-color',
-                            {
-                                'property': 'value',
-                                'type': 'categorical',
-                                'stops': [
-                                    ['very high','#1C2040'],
-                                    ['high','#337598'],
-                                    ['average','#C8D3BA'],
-                                    ['low', '#BDAD9D'],
-                                    ['very low','#967a4a']
+                    map.setPaintProperty('HRUs', 'fill-extrusion-height', {
+                                property: 'value',
+                                type: 'categorical',
+                                stops: [
+                                    ['very high', 0],
+                                    ['high', 0],
+                                    ['average', 0],
+                                    ['low', 0],
+                                    ['very low', 0]
                                 ]
                             }
                     );
-                    this.$refs.mapLegend.createLegend();
                 }
-
-                // 'fill-extrusion-color': {
-                //     'property': 'value',
-                //             'type': 'categorical',
-                //             'stops': [
-                //         ['very high','#1C2040'],
-                //         ['high','#337598'],
-                //         ['average','#C8D3BA'],
-                //         ['low', '#BDAD9D'],
-                //         ['very low','#967a4a']
-                //     ]
-                // },
-                // 'fill-extrusion-height': {
-                //     property: 'value',
-                //             type: 'categorical',
-                //             stops: [
-                //         ['very high', 100000],
-                //         ['high', 75000],
-                //         ['average', 50000],
-                //         ['low', 25000],
-                //         ['very low',0]
-                //     ]
-                // },
-                // 'fill-extrusion-opacity': 1
-
                 this.is3D = !this.is3D;
             },
             runGoogleAnalytics(eventName, action, label) {
-                this.$ga.set({ dimension2: Date.now() });
+                this.$ga.set({dimension2: Date.now()});
                 this.$ga.event(eventName, action, label);
             },
             clickAnywhereToCloseMapInfoBox() {
@@ -260,7 +360,7 @@
                 let toggleTitle = document.createElement("div");
                 let toggleExit = document.createElement("div");
                 let exitIcon = document.createElement("span");
-                exitIcon.innerHTML = icon({ prefix: "fas", iconName: "times" }).html;
+                exitIcon.innerHTML = icon({prefix: "fas", iconName: "times"}).html;
                 let mapLayers = document.createElement("div");
                 let flowDetail = document.createElement("div");
                 let streams = document.createElement("div");
@@ -293,19 +393,19 @@
                 mapLayersToggleContainer.appendChild(toggleOptions);
                 correctDiv.appendChild(mapLayersToggleContainer);
 
-                mapLayersToggleContainer.onclick = function(e){
+                mapLayersToggleContainer.onclick = function (e) {
                     e.stopPropagation();
-                }
-                toggleExit.onclick = function(e){
+                };
+                toggleExit.onclick = function (e) {
                     e.stopPropagation();
                     contentToggle(mapLayersToggleContainer);
-                }
-                document.body.onclick = function(){
-                    if(mapLayersToggleContainer.style.display === "block"){
+                };
+                document.body.onclick = function () {
+                    if (mapLayersToggleContainer.style.display === "block") {
                         contentToggle(mapLayersToggleContainer);
                     }
-                }
-                let contentToggle = function(name) {
+                };
+                let contentToggle = function (name) {
                     if (name.style.display === "block") {
                         name.style.display = "none";
                     } else {
@@ -352,7 +452,7 @@
                 let elementTargets = ["mapLayers", "streams"];
                 let countup = 0;
 
-                assembledIdSets.forEach(function(idSet) {
+                assembledIdSets.forEach(function (idSet) {
                     // Go through each layer id that is in the array and make a button element for it
                     for (let index = 0; index < idSet.length; index++) {
                         let id = idSet[index];
@@ -369,7 +469,7 @@
                         link.textContent = id;
                         // Creates a click event for each button so that when clicked by the user, the visibility property
                         // is changed as is the class (color) of the button
-                        link.onclick = function(e) {
+                        link.onclick = function (e) {
                             googleAnalytics('layers-menu', 'click', 'user clicked ' + id);
                             let clickedLayer = this.textContent;
                             let clickedLayerParent = this.parentElement;
@@ -384,8 +484,8 @@
                                 map.setLayoutProperty(clickedLayer, "visibility", "none");
                                 this.className = "";
                             } else {
-                                if(clickedLayerParent.id === "streams"){
-                                    for(let i = 0; i < clickedLayerParentKids.length; i++){
+                                if (clickedLayerParent.id === "streams") {
+                                    for (let i = 0; i < clickedLayerParentKids.length; i++) {
                                         clickedLayerParentKids[i].className = "";
                                         map.setLayoutProperty(clickedLayerParentKids[i].textContent, "visibility", "none");
                                     }
@@ -403,38 +503,39 @@
                 // next section controls the HRU hover effect
                 let hoveredHRUId = this.hoveredHRUId;
 
-                map.on("mousemove", "HRUs", function(e) {
+                map.on("mousemove", "HRUs", function (e) {
                     if (e.features.length > 0) {
                         if (hoveredHRUId) {
                             map.setFeatureState(
-                                    { source: "HRU", sourceLayer: "hrus", id: hoveredHRUId },
-                                    { hover: false }
+                                    {source: "HRU", sourceLayer: "hrus", id: hoveredHRUId},
+                                    {hover: false}
                             );
                         }
                         hoveredHRUId = e.features[0].id;
                         map.setFeatureState(
-                                { source: "HRU", sourceLayer: "hrus", id: hoveredHRUId },
-                                { hover: true }
+                                {source: "HRU", sourceLayer: "hrus", id: hoveredHRUId},
+                                {hover: true}
                         );
                     }
                 });
-                map.on("mouseleave", "HRUS Fill Colors", function() {
+                map.on("mouseleave", "HRUS Fill Colors", function () {
                     if (hoveredHRUId) {
                         map.setFeatureState(
-                                { source: "HRU", sourceLayer: "hrus", id: hoveredHRUId },
-                                { hover: false }
+                                {source: "HRU", sourceLayer: "hrus", id: hoveredHRUId},
+                                {hover: false}
                         );
                     }
                     hoveredHRUId = null;
                 });
-                
+
                 // Next section adds the current zoom level display to the map for development purposes.
                 // The zoom level display should only show in 'development' versions of the application
                 if (process.env.VUE_APP_ADD_ZOOM_LEVEL_DISPLAY && process.env.VUE_APP_ADD_ZOOM_LEVEL_DISPLAY === 'true') {
                     function onZoomend() {
                         let currentZoom = map.getZoom();
-                        document.getElementById("zoom-level-div").innerHTML = 'Current Zoom Level (listed for development purposes): ' + currentZoom ;
+                        document.getElementById("zoom-level-div").innerHTML = 'Current Zoom Level (listed for development purposes): ' + currentZoom;
                     }
+
                     map.on("zoomend", onZoomend);
                 }
             }
@@ -444,6 +545,7 @@
 
 <style scoped lang="scss">
   @import "~mapbox-gl/dist/mapbox-gl.css";
+
   $color: #fff;
   $blue: #4574a3;
   $border: 1px solid #fff;
@@ -458,7 +560,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
   }
@@ -466,6 +568,7 @@
   .header-container {
     background-color: #fff;
   }
+
   /* Add a background color to the layer toggle bar */
   #mapbox_component-layer-toggle {
     background-color: $blue;
@@ -476,6 +579,7 @@
   #topNavText {
     border-right: $border;
     width: 110px;
+
     a {
       width: 100%;
       font-size: 0.9em;
@@ -489,6 +593,7 @@
     display: flex;
     width: 120px;
     border-left: $border;
+
     a {
       flex: 1;
       background: #00264c;
@@ -496,37 +601,39 @@
       color: $color;
     }
 
-    a.active{
+    a.active {
       background: #00bf26
     }
 
     .icon {
-      &:nth-child(2){
+      &:nth-child(2) {
         border-left: $border;
       }
     }
   }
 
   #layers,
-  #streams{
+  #streams {
     display: none;
   }
 
   .usa-prose {
     border-bottom: $borderGray;
     display: flex;
+
     h1 {
       font-size: 1rem;
       margin-left: 10px;
       flex: 1;
     }
-    a{
+
+    a {
       margin: 0;
       display: block;
     }
   }
 
-  #aboutButton{
+  #aboutButton {
     background: none;
     color: #003366;
     width: 100px;
@@ -535,9 +642,35 @@
     outline: none;
     border: none;
     border-left: $borderGray;
-    &:hover{
+
+    &:hover {
       background: #00bf26;
       color: #fff;
+    }
+  }
+
+  #theme-selection {
+    display: flex;
+
+    button {
+      flex: 1;
+    }
+  }
+
+  #control-panel {
+    padding: 3px 10px 3px 10px;
+    display: flex;
+
+    div {
+      padding-left: 10px;
+      flex: 1;
+    }
+  }
+
+  #three-d-buttons {
+    display: flex;
+    button {
+      flex: 1;
     }
   }
 
@@ -582,7 +715,7 @@
     position: absolute;
     z-index: 9000;
 
-    a{
+    a {
       outline: none;
     }
   }
@@ -592,7 +725,7 @@
     border-bottom: $border;
   }
 
-  .layersTitle{
+  .layersTitle {
     height: 35px;
     padding: 0 0 0 10px;
     line-height: 35px;
@@ -612,7 +745,7 @@
     border-left: $border;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       background: #00bf26;
       color: #fff;
     }
@@ -630,9 +763,11 @@
     flex-direction: column;
     overflow-y: auto;
   }
+
   .options {
     display: flex;
     flex-direction: column;
+
     a {
       padding: 10px;
       border-bottom: $border;
@@ -640,12 +775,14 @@
       font-size: 1em;
       color: #000;
       background: #f5f7fb;
+
       &:hover {
         background: #00bf26;
         color: #fff;
         opacity: 1;
       }
     }
+
     .active {
       background: #003366;
       opacity: .7;
@@ -658,8 +795,8 @@
     padding-left: 5px;
   }
 
-  @media screen and (min-width: 960px){
-    #mapLayersToggleContainer{
+  @media screen and (min-width: 960px) {
+    #mapLayersToggleContainer {
       width: 25%;
       max-width: 500px;
       height: auto;

@@ -1,71 +1,71 @@
 <template>
   <div id="legendContainer">
     <div
-        v-show="!isLegendHidden"
-        id="tabs"
+      v-show="!isLegendHidden"
+      id="tabs"
     >
       <div
-          id="minimizeTab"
-          class="tab"
+        id="minimizeTab"
+        class="tab"
       >
         <a
-            id="legendMinimize"
-            class="tabIcon"
-            aria-label="close legend dialog box"
-            @click="runGoogleAnalytics('legend', 'click', 'user reduced legend'), legendToggle()"
+          id="legendMinimize"
+          class="tabIcon"
+          aria-label="close legend dialog box"
+          @click="runGoogleAnalytics('legend', 'click', 'user reduced legend'), legendToggle()"
         >
-          <font-awesome-icon icon="angle-down"/>
+          <font-awesome-icon icon="angle-down" />
         </a>
       </div>
       <div
-          id="infoTab"
-          class="tab"
+        id="infoTab"
+        class="tab"
       >
         <a
-            id="legendInfoButton"
-            class="tabIcon"
-            aria-label="open information dialog box"
-            @click="runGoogleAnalytics('legend', 'click', 'user clicked info icon'), modalToggle()"
+          id="legendInfoButton"
+          class="tabIcon"
+          aria-label="open information dialog box"
+          @click="runGoogleAnalytics('legend', 'click', 'user clicked info icon'), modalToggle()"
         >
           <font-awesome-icon
-              v-if="!isInfoShowing"
-              icon="info"
+            v-if="!isInfoShowing"
+            icon="info"
           />
           <font-awesome-icon
-              v-else
-              icon="list"
+            v-else
+            icon="list"
           />
         </a>
       </div>
     </div>
     <div
-        v-show="!isLegendHidden && !isInfoShowing"
-        id="legend"
+      v-show="!isLegendHidden && !isInfoShowing"
+      id="legend"
     >
       <div id="legendTitle">
         <p>{{ legendTitle }}</p>
       </div>
-      <div id="keysAndText"/>
+      <div id="keysAndText" />
     </div>
     <LegendModal
-        v-show="isInfoShowing && !isLegendHidden"
-        @clickedX="modalToggle()"
+      v-show="isInfoShowing && !isLegendHidden"
+      @clickedX="modalToggle()"
     />
     <div
-        v-show="isLegendHidden"
-        id="collapsedLegend"
+      v-show="isLegendHidden"
+      id="collapsedLegend"
     >
       <div id="collaspedLegendText">
         <p>Legend</p>
       </div>
       <div id="collapsedLegendIcon">
         <a
-            id="legendPlus"
-            class="legendIcon"
-            aria-label="close extended legend box"
-            @click="runGoogleAnalytics('legend', 'click', 'user expanded legend'), legendToggle()"
+          id="legendPlus"
+          class="legendIcon"
+          aria-label="close extended legend box"
+          @click="runGoogleAnalytics('legend', 'click', 'user expanded legend'), legendToggle()"
         >
-          <font-awesome-icon icon="angle-left"/>
+          <font-awesome-icon icon="angle-left" />
         </a>
       </div>
     </div>
