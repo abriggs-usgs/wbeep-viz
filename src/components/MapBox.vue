@@ -108,10 +108,10 @@
                 mapStyle: mapStyles.style,
                 container: 'map',
                 zoom: 2,
-                minZoom: 2,
-                maxZoom: 5.99,
+                minZoom: 0,
+                maxZoom: 24,
                 center: [-95.7129, 37.0902],
-                pitch: 60, // tips the map from 0 to 60 degrees
+                pitch: 35, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
 
                 maxBounds: [[-168.534393,-4.371744], [-19.832382,71.687625]], // The coordinates needed to make a bounding box for the continental United States.
@@ -299,12 +299,12 @@
                 !this.isFirstClick ? this.isAboutMapInfoBoxOpen = !this.isAboutMapInfoBoxOpen : null;
             },
             usStateColor: function(percentWaterArea) {
-                return percentWaterArea > 30 ? 'blue' :
-                        percentWaterArea > 20 ? 'green' :
-                        percentWaterArea > 10 ? 'yellow' :
-                        percentWaterArea > 5 ? 'pink' :
-                        percentWaterArea > 1 ? 'orange' :
-                        '   #FFEDA0';
+                return percentWaterArea > 30 ? '#09203F' :
+                        percentWaterArea > 20 ? '#2B445C' :
+                        percentWaterArea > 10 ? '#4D6879' :
+                        percentWaterArea > 5 ? '#6F8C97' :
+                        percentWaterArea > 1 ? '#91B0B4' :
+                        '#B3D5D2';
             },
             usStateExtrusionHeight: function(percentWaterArea) {
                 return percentWaterArea * 10000;
@@ -332,7 +332,7 @@
                     'type': 'line',
                     'source': 'waterAreaByState',
                     'paint': {
-                        'line-color': 'rgba(57, 79, 87, 1)'
+                        'line-color': 'rgba(57, 79, 87, 0.9)'
                     }
                 };
 
@@ -351,15 +351,13 @@
                             'paint': {
                                 'fill-extrusion-color': color,
                                 'fill-extrusion-height': extrusionHeight,
-                                'fill-extrusion-opacity': .5
+                                'fill-extrusion-opacity': .9
                             }
                         };
 
                         map.addLayer(styleObject);
                     }
                 });
-                console.log('layers ', map.getStyle().layers)
-
             }
         }
     };

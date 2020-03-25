@@ -258,7 +258,7 @@ export default {
                 'type': 'raster',
                 'source': 'hillshade',
                 'layout': {
-                    'visibility': 'none'
+                    'visibility': 'visible'
                 },
                 'showButtonLayerToggle': true,
                 'showButtonStreamToggle': false,
