@@ -13,12 +13,6 @@ export default {
                 'minzoom': 2, // setting this to equal the minzoom of main map, real tile extent is 2
                 'maxzoom': 6  // setting this to equal the maxzoom of main map, real tile extent is 10
             },
-            HRU: {
-                type: 'vector',
-                'tiles': hruTileUrl,
-                'minzoom': 2, // setting this to equal the minzoom of main map, real tile extent is 0
-                'maxzoom': 6  // setting this to equal the maxzoom of main map, real tile extent is 11
-            },
             nhd_streams_grouped: {
                 type: 'vector',
                 'tiles':['https://maptiles-prod-website.s3-us-west-2.amazonaws.com/nhdstreams_grouped/{z}/{x}/{y}.pbf'],
@@ -49,41 +43,6 @@ export default {
                 },
                 'type': 'background',
                 'showButtonLayerToggle': false
-            },
-            {
-                'id': 'HRUs',
-                'type': 'fill',
-                'source': 'HRU',
-                'source-layer': 'hrus',
-                'layout': {
-                    'visibility': 'visible'
-                },
-                'paint': {
-                    'fill-color': {
-                        'property': 'value',
-                        'type': 'categorical',
-                        'stops': [
-                            ['very high','#1C2040'],
-                            ['high','#337598'],
-                            ['average','#C8D3BA'],
-                            ['low', '#BDAD9D'],
-                            ['very low','#967a4a']
-                        ]
-                    },
-                    'fill-opacity': ['case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        0.7,
-                        1
-                    ]
-                },
-                'showButtonLayerToggle': false,
-                'legendText': {
-                    'very high': ['Very High'],
-                    'high': ['High'],
-                    'average': ['Normal'],
-                    'low': ['Low'],
-                    'very low': ['Very Low']
-                }
             },
             {
                 'filter': ['all', ['==', '$type', 'LineString'],
@@ -264,22 +223,6 @@ export default {
                 'showButtonStreamToggle': true,
             },
             {
-                'id': 'Hydrologic Response Unit',
-                'type': 'line',
-                'source': 'HRU',
-                'source-layer': 'hrus',
-                'minzoom': 5,
-                'maxzoom': 24,
-                'layout': {
-                    'visibility': 'none'
-                },
-                'paint': {
-                    'line-color': 'rgba(57, 79, 87, 1)'
-                },
-                'showButtonLayerToggle': true,
-                'showButtonStreamToggle': false
-            },
-            {
                 'id': 'Neighboring Countries',
                 'type': 'fill',
                 'source': 'basemap',
@@ -315,41 +258,10 @@ export default {
                 'type': 'raster',
                 'source': 'hillshade',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
                 'showButtonLayerToggle': true,
                 'showButtonStreamToggle': false,
-            },
-            {
-                'id': 'Counties',
-                'type': 'line',
-                'source': 'basemap',
-                'source-layer': 'counties',
-                'minzoom': 4.5,
-                'maxzoom': 24,
-                'layout': {
-                    'visibility': 'none'
-                },
-                'paint': {
-                    'line-color': 'rgb(0,0,0)',
-                    'line-dasharray': [2, 4]
-                },
-                'showButtonLayerToggle': true
-            },
-            {
-                'id': 'states',
-                'type': 'line',
-                'source': 'basemap',
-                'source-layer': 'states',
-                'minzoom': 2,
-                'maxzoom': 24,
-                'layout': {
-                    'visibility': 'visible',
-                },
-                'paint': {
-                    'line-color': 'rgb(0,0,0)'
-                }
-
             },
             {
                 'filter': ['all', ['==', '$type', 'Point'],

@@ -20,15 +20,6 @@
       v-if="!isInternetExplorer"
       id="mapContainer"
     >
-      <MapSubtitle
-        :is-about-map-info-box-open="isAboutMapInfoBoxOpen"
-        @clickedInfoIcon="toggleMapInfoBox()"
-        @clickedExit="toggleMapInfoBox()"
-      />
-      <MapAvailableDataDate />
-      <MapLegend
-        :legend-title="legendTitle"
-      />
       <MglMap
         id="mapgl"
         :container="container"
@@ -73,12 +64,10 @@
 <script>
     import LoadingScreen from './LoadingScreen';
     import InternetExplorerPage from './InternetExplorerPage';
-    import MapSubtitle from './MapSubtitle';
-    import MapAvailableDataDate from './MapAvailableDataDate';
-    import MapLegend from './MapLegend';
     import MapLayers from './MapLayers';
     import { icon } from '@fortawesome/fontawesome-svg-core';
     import QuestionControl from './QuestionControl';
+    import waterAreaByState from "../assets/json/waterAreaByState";
 
     import {
         MglMap,
@@ -96,14 +85,11 @@
             LoadingScreen,
             InternetExplorerPage,
             MglMap,
-            MapSubtitle,
-            MapAvailableDataDate,
             MglNavigationControl,
             MglGeolocateControl,
             MglFullscreenControl,
             MglScaleControl,
             MglAttributionControl,
-            MapLegend,
             MapLayers,
             QuestionControl
         },
@@ -125,9 +111,9 @@
                 minZoom: 2,
                 maxZoom: 5.99,
                 center: [-95.7129, 37.0902],
-                pitch: 0, // tips the map from 0 to 60 degrees
+                pitch: 60, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
-                hoveredHRUId: null,
+
                 maxBounds: [[-168.534393,-4.371744], [-19.832382,71.687625]], // The coordinates needed to make a bounding box for the continental United States.
                 legendTitle: 'Latest Natural Water Storage',
                 isLoading: true,
@@ -139,39 +125,10 @@
             };
         },
         methods: {
-            activeHighlightOnHover() {
-                const map = this.$store.map;
-                let hoveredHRUId = this.hoveredHRUId;
 
-                map.on('mousemove', 'HRUs', function(e) {
-                    if (e.features.length > 0) {
-                        if (hoveredHRUId) {
-                            map.setFeatureState(
-                                    { source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId },
-                                    { hover: false }
-                            );
-                        }
-                        hoveredHRUId = e.features[0].id;
-                        map.setFeatureState(
-                                { source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId },
-                                { hover: true }
-                        );
-                    }
-                });
-                map.on('mouseleave', 'HRUS Fill Colors', function() {
-                    if (hoveredHRUId) {
-                        map.setFeatureState(
-                                { source: 'HRU', sourceLayer: 'hrus', id: hoveredHRUId },
-                                { hover: false }
-                        );
-                    }
-                    hoveredHRUId = null;
-                });
-            },
             addZoomLevelIndicator() {
                 const map = this.$store.map;
                 this.currentZoom = map.getZoom();
-                this.changeButtonStateBasedOnZoomLevel();
                 process.env.VUE_APP_ADD_ZOOM_LEVEL_DISPLAY === 'true' ?
                         document.getElementById('zoom-level-div').innerHTML = 'Current Zoom Level (listed for development purposes): ' + this.currentZoom : null;
             },
@@ -341,6 +298,17 @@
             toggleMapInfoBox() {
                 !this.isFirstClick ? this.isAboutMapInfoBoxOpen = !this.isAboutMapInfoBoxOpen : null;
             },
+            usStateColor: function(percentWaterArea) {
+                return percentWaterArea > 30 ? 'blue' :
+                        percentWaterArea > 20 ? 'green' :
+                        percentWaterArea > 10 ? 'yellow' :
+                        percentWaterArea > 5 ? 'pink' :
+                        percentWaterArea > 1 ? 'orange' :
+                        '   #FFEDA0';
+            },
+            usStateExtrusionHeight: function(percentWaterArea) {
+                return percentWaterArea * 10000;
+            },
             onMapLoaded(event) {
                 this.$store.map = event.map; // The 'event' gives us access to the map as an object but only after the map has loaded. Once we have that, we add the map object to the Vuex store
                 const map = this.$store.map;
@@ -353,7 +321,45 @@
                 map.on('zoomend', this.addZoomLevelIndicator); // Add the current zoom level display. The zoom level should only show in 'development' versions of the application.
                 this.createLayerMenu();
                 this.populateLayerMenuGroupsAndButtons(googleAnalytics);
-                this.activeHighlightOnHover();
+
+
+                map.addSource('waterAreaByState', {
+                    'type': 'geojson',
+                    'data': waterAreaByState.statesData
+                });
+                const styleObjectUsStateOutline = {
+                    'id': 'states-outline',
+                    'type': 'line',
+                    'source': 'waterAreaByState',
+                    'paint': {
+                        'line-color': 'rgba(57, 79, 87, 1)'
+                    }
+                };
+
+                map.addLayer(styleObjectUsStateOutline);
+
+                waterAreaByState.statesData.features.forEach(feature => {
+                    const layerID = feature.properties.name;
+                    const color = this.usStateColor(feature.properties.percentWaterArea);
+                    const extrusionHeight = this.usStateExtrusionHeight(feature.properties.percentWaterArea);
+                    if(!map.getLayer(layerID)) {
+                        const styleObject = {
+                            'id': layerID,
+                            'source': 'waterAreaByState',
+                            'type': 'fill-extrusion',
+                            'filter': ['==', 'name', layerID],
+                            'paint': {
+                                'fill-extrusion-color': color,
+                                'fill-extrusion-height': extrusionHeight,
+                                'fill-extrusion-opacity': .5
+                            }
+                        };
+
+                        map.addLayer(styleObject);
+                    }
+                });
+                console.log('layers ', map.getStyle().layers)
+
             }
         }
     };
