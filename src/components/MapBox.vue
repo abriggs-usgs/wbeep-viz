@@ -11,7 +11,7 @@
     <div class="header-container">
       <div class="usa-prose">
         <h1 class="title-text">
-          {{ title }}{{ titleSuffix }} {{ developmentTier }}
+          {{ title }} {{ titleSuffix }} {{ developmentTier }}
         </h1>
       </div>
     </div>
@@ -33,7 +33,7 @@
         :pitch-with-rotate="false"
         :drag-rotate="false"
         :touch-zoom-rotate="false"
-        :max-bounds="maxBounds"
+
         @load="onMapLoaded"
       >
         <MglAttributionControl
@@ -56,8 +56,24 @@
         <MapLayers />
       </MglMap>
     </div>
+
+
+    <div id="control-panel">
+      <div>
+        <range-slider
+          id="extrusion-multiplier"
+          v-model="extrusionMultiplier"
+          class="slider"
+          min="1"
+          max="10000"
+          step="1"
+        />
+        <span>extrusion multiplier {{ extrusionMultiplier.toFixed(1) }}</span>
+      </div>
+    </div>
+    <div id="map-selection-button-div" />
     <!--The next div contains information to show the current zoom level of the map. This will only show on the
-          development version of the application. To find the code controlling this, search for 'zoom level display' -->
+       development version of the application. To find the code controlling this, search for 'zoom level display' -->
     <div id="zoom-level-div" />
   </div>
 </template>
@@ -78,6 +94,8 @@
         MglAttributionControl
     } from 'vue-mapbox';
     import mapStyles from '../assets/mapStyles/mapStyles';
+    import RangeSlider from 'vue-range-slider'
+    import 'vue-range-slider/dist/vue-range-slider.css'
 
     export default {
         name: 'MapBox',
@@ -91,7 +109,8 @@
             MglScaleControl,
             MglAttributionControl,
             MapLayers,
-            QuestionControl
+            QuestionControl,
+            RangeSlider
         },
         props: {
             isInternetExplorer: {
@@ -103,29 +122,32 @@
         data() {
             return {
                 title: process.env.VUE_APP_TITLE,
-                titleSuffix: process.env.VUE_APP_TITLE_SUFFIX,
+                titleSuffix: 'Percent Water Area',
                 developmentTier: process.env.VUE_APP_TIER,
                 mapStyle: mapStyles.style,
                 container: 'map',
-                zoom: 2,
-                minZoom: 0,
+                zoom: 1,
+                minZoom: 2,
                 maxZoom: 24,
                 center: [-95.7129, 37.0902],
                 pitch: 35, // tips the map from 0 to 60 degrees
                 bearing: 0, // starting rotation of the map from 0 to 360
 
-                maxBounds: [[-168.534393,-4.371744], [-19.832382,71.687625]], // The coordinates needed to make a bounding box for the continental United States.
-                legendTitle: 'Latest Natural Water Storage',
+                // maxBounds: [[-168.534393,-4.371744], [-19.832382,71.687625]], // The coordinates needed to make a bounding box for the continental United States.
                 isLoading: true,
                 isAboutMapInfoBoxOpen: true,
                 isFirstClick: true,
                 activeFlowDetailLayer: null,
                 currentZoom: null,
-                mapLayerIdsForZoomDependentButtons: ['Roads', 'Hydrologic Response Unit', 'Terrain', 'Counties', 'Least Detail', 'Medium Detail', 'Most Detail']
+                mapLayerIdsForZoomDependentButtons: ['Roads', 'Hydrologic Response Unit', 'Terrain', 'Counties', 'Least Detail', 'Medium Detail', 'Most Detail'],
+                mapType: 'Percent Water Area',
+                extrusionMultiplier: 1
             };
         },
+        watch: {
+            extrusionMultiplier: function() {this.extrudeMapSections(this.mapType)},
+        },
         methods: {
-
             addZoomLevelIndicator() {
                 const map = this.$store.map;
                 this.currentZoom = map.getZoom();
@@ -256,7 +278,7 @@
                     self.contentToggle(mapLayersToggleContainer);
                 };
                 document.body.onclick = function(){
-                    if(mapLayersToggleContainer.style.display === 'block'){
+                    if(mapLayersToggleContainer.style.display === 'block') {
                         self.contentToggle(mapLayersToggleContainer);
                     }
                 };
@@ -298,16 +320,75 @@
             toggleMapInfoBox() {
                 !this.isFirstClick ? this.isAboutMapInfoBoxOpen = !this.isAboutMapInfoBoxOpen : null;
             },
-            usStateColor: function(percentWaterArea) {
-                return percentWaterArea > 30 ? '#09203F' :
-                        percentWaterArea > 20 ? '#2B445C' :
-                        percentWaterArea > 10 ? '#4D6879' :
-                        percentWaterArea > 5 ? '#6F8C97' :
-                        percentWaterArea > 1 ? '#91B0B4' :
-                        '#B3D5D2';
+            usStateColor: function(numberValue, greatestValueInCurrentSet) {
+
+                return numberValue > greatestValueInCurrentSet * 0.9 ? '#09203F' :
+                        numberValue > greatestValueInCurrentSet * 0.8 ? '#162E4A' :
+                        numberValue > greatestValueInCurrentSet * 0.7 ? '#243C56' :
+                        numberValue > greatestValueInCurrentSet * 0.6 ? '#3F596D' :
+                        numberValue > greatestValueInCurrentSet * 0.5 ? '#4D6879' :
+                        numberValue > greatestValueInCurrentSet * 0.4 ? '#5A7685' :
+                        numberValue > greatestValueInCurrentSet * 0.3 ? '#688490' :
+                        numberValue > greatestValueInCurrentSet * 0.2 ? '#75939C' :
+                        numberValue > greatestValueInCurrentSet * 0.1 ? '#83A1A8' :
+                        '#91B0B4';
             },
-            usStateExtrusionHeight: function(percentWaterArea) {
-                return percentWaterArea * 10000;
+            createTopicSelectionButtons() {
+                const self = this;
+                Object.keys(waterAreaByState.statesData.features[0].properties).forEach(function(name) {
+                    if (name !== 'name' ) {
+                        const buttonDiv = document.getElementById('map-selection-button-div');
+                        const mapSelectionButton = document.createElement('button');
+                        const mapSelectionButtonText = document.createTextNode(name);
+                        mapSelectionButton.appendChild(mapSelectionButtonText);
+                        mapSelectionButton.onclick = function() {self.extrudeMapSections(name)};
+                        buttonDiv.appendChild(mapSelectionButton);
+                    }
+                });
+            },
+            findGreatestValueInDataset(mapType) {
+                let greatestValueInSet = null;
+                waterAreaByState.statesData.features.forEach(usState => {
+                    if (usState.properties[mapType] > greatestValueInSet) {
+                        greatestValueInSet = usState.properties[mapType];
+                    }
+                });
+                return greatestValueInSet;
+            },
+            extrudeMapSections(mapType) {
+                const map = this.$store.map;
+                const self = this;
+                const greatestValueInCurrentSet = self.findGreatestValueInDataset(mapType);
+                self.titleSuffix = mapType;
+
+                waterAreaByState.statesData.features.forEach(usState => {
+                    const layerID = usState.properties.name;
+
+                    if (map.getLayer(layerID)) {
+                        map.removeLayer(layerID);
+                    }
+
+                    const color = this.usStateColor(usState.properties[mapType], greatestValueInCurrentSet);
+
+                    if (usState.properties[mapType] !== undefined) {
+                        const extrusionHeight = self.extrusionMultiplier * usState.properties[mapType];
+                        if(!map.getLayer(layerID)) {
+                            const styleObject = {
+                                'id': layerID,
+                                'source': 'waterAreaByState',
+                                'type': 'fill-extrusion',
+                                'filter': ['==', 'name', layerID],
+                                'paint': {
+                                    'fill-extrusion-color': color,
+                                    'fill-extrusion-height': extrusionHeight,
+                                    'fill-extrusion-opacity': .9
+                                }
+                            };
+                            map.addLayer(styleObject);
+                        }
+                    }
+                });
+                this.mapType = mapType
             },
             onMapLoaded(event) {
                 this.$store.map = event.map; // The 'event' gives us access to the map as an object but only after the map has loaded. Once we have that, we add the map object to the Vuex store
@@ -316,11 +397,13 @@
                 map.resize(); //This solves the mysterious whitespace by resizing the map to the correct size.
                 map.touchZoomRotate.enable(); // Allow users to pinch to zoom on touch devices.
                 map.touchZoomRotate.disableRotation(); // Disable the rotation functionality, but keep pinch to zoom.
-                map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]); // Once map is loaded, zoom in a bit more so that the map neatly fills the screen.
+                // map.fitBounds([[-125.3321, 23.8991], [-65.7421, 49.4325]]); // Once map is loaded, zoom in a bit more so that the map neatly fills the screen.
                 setTimeout(() => { this.isLoading = false; }, 200);// Set a timeout to make sure the fitbounds action is completely done before loading screen fades away.
                 map.on('zoomend', this.addZoomLevelIndicator); // Add the current zoom level display. The zoom level should only show in 'development' versions of the application.
                 this.createLayerMenu();
                 this.populateLayerMenuGroupsAndButtons(googleAnalytics);
+
+                this.createTopicSelectionButtons();
 
 
                 map.addSource('waterAreaByState', {
@@ -337,27 +420,7 @@
                 };
 
                 map.addLayer(styleObjectUsStateOutline);
-
-                waterAreaByState.statesData.features.forEach(feature => {
-                    const layerID = feature.properties.name;
-                    const color = this.usStateColor(feature.properties.percentWaterArea);
-                    const extrusionHeight = this.usStateExtrusionHeight(feature.properties.percentWaterArea);
-                    if(!map.getLayer(layerID)) {
-                        const styleObject = {
-                            'id': layerID,
-                            'source': 'waterAreaByState',
-                            'type': 'fill-extrusion',
-                            'filter': ['==', 'name', layerID],
-                            'paint': {
-                                'fill-extrusion-color': color,
-                                'fill-extrusion-height': extrusionHeight,
-                                'fill-extrusion-opacity': .9
-                            }
-                        };
-
-                        map.addLayer(styleObject);
-                    }
-                });
+                this.extrudeMapSections(this.mapType);
             }
         }
     };
@@ -474,6 +537,22 @@
     min-height: 550px;
     display: flex;
     flex-direction: column;
+  }
+
+  #control-panel {
+    padding: 3px 10px 3px 10px;
+    display: flex;
+    div {
+      padding-left: 10px;
+      flex: 1;
+    }
+  }
+
+  #map-selection-button-div {
+    display: flex;
+    button {
+      flex: 1;
+    }
   }
 
   @media screen and (min-width: 600px) and (min-height: 850px) {

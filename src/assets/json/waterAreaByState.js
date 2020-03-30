@@ -8,15 +8,13 @@ export default {
                 "properties": {
                     "name": "Alabama",
                     "density": 94.65,
-                    "Total area square miles": "52,420",
-                    "Total area square kilometers": "135,767",
-                    "Land area square miles": "50,645",
-                    "Land area square kilometers": "131,171",
-                    "Water area square miles": "1,775",
-                    "Water area square kilometers": "4,597",
-                    "percentWaterArea": "3.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 52420,
+                    "Total area square kilometers": 135767,
+                    "Land area square miles": 50645,
+                    "Land area square kilometers": 131171,
+                    "Water area square miles": 1775,
+                    "Water area square kilometers": 4597,
+                    "Percent Water Area": 3.40
 
                 },
                 "geometry": {
@@ -165,15 +163,13 @@ export default {
                 "properties": {
                     "name": "Alaska",
                     "density": 1.264,
-                    "Total area square miles": "665,384",
-                    "Total area square kilometers": "1,723,337",
-                    "Land area square miles": "570,641",
-                    "Land area square kilometers": "1,477,953",
-                    "Water area square miles": "94,743",
-                    "Water area square kilometers": "245,383",
-                    "percentWaterArea": "14.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 665384,
+                    "Total area square kilometers": 1723337,
+                    "Land area square miles": 570641,
+                    "Land area square kilometers": 1477953,
+                    "Water area square miles": 94743,
+                    "Water area square kilometers": 245383,
+                    "Percent Water Area": 14.20
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -4639,15 +4635,13 @@ export default {
                 "properties": {
                     "name": "Arizona",
                     "density": 57.05,
-                    "Total area square miles": "113,990",
-                    "Total area square kilometers": "295,234",
-                    "Land area square miles": "113,594",
-                    "Land area square kilometers": "294,207",
+                    "Total area square miles": 113990,
+                    "Total area square kilometers": 295234,
+                    "Land area square miles": 113594,
+                    "Land area square kilometers": 294207,
                     "Water area square miles": 396,
-                    "Water area square kilometers": "1,026",
-                    "percentWaterArea": "0.30",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1026,
+                    "Percent Water Area": 0.30
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -4791,15 +4785,13 @@ export default {
                 "properties": {
                     "name": "Arkansas",
                     "density": 56.43,
-                    "Total area square miles": "53,179",
-                    "Total area square kilometers": "137,732",
-                    "Land area square miles": "52,035",
-                    "Land area square kilometers": "134,771",
-                    "Water area square miles": "1,143",
-                    "Water area square kilometers": "2,961",
-                    "percentWaterArea": "2.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 53179,
+                    "Total area square kilometers": 137732,
+                    "Land area square miles": 52035,
+                    "Land area square kilometers": 134771,
+                    "Water area square miles": 1143,
+                    "Water area square kilometers": 1961,
+                    "Percent Water Area": 2.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -4963,15 +4955,13 @@ export default {
                 "properties": {
                     "name": "California",
                     "density": 241.7,
-                    "Total area square miles": "163,695",
-                    "Total area square kilometers": "423,967",
-                    "Land area square miles": "155,779",
-                    "Land area square kilometers": "403,466",
-                    "Water area square miles": "7,916",
-                    "Water area square kilometers": "20,501",
-                    "percentWaterArea": "4.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 163695,
+                    "Total area square kilometers": 423967,
+                    "Land area square miles": 155779,
+                    "Land area square kilometers": 403466,
+                    "Water area square miles": 7916,
+                    "Water area square kilometers": 20501,
+                    "Percent Water Area": 4.80
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5359,15 +5349,13 @@ export default {
                 "properties": {
                     "name": "Colorado",
                     "density": 49.33,
-                    "Total area square miles": "104,094",
-                    "Total area square kilometers": "269,601",
-                    "Land area square miles": "103,642",
-                    "Land area square kilometers": "268,431",
+                    "Total area square miles": 104094,
+                    "Total area square kilometers": 269601,
+                    "Land area square miles": 103642,
+                    "Land area square kilometers": 268431,
                     "Water area square miles": 452,
-                    "Water area square kilometers": "1,170",
-                    "percentWaterArea": "0.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1170,
+                    "Percent Water Area": 0.40
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5447,15 +5435,13 @@ export default {
                 "properties": {
                     "name": "Connecticut",
                     "density": 739.1,
-                    "Total area square miles": "5,543",
-                    "Total area square kilometers": "14,357",
-                    "Land area square miles": "4,842",
-                    "Land area square kilometers": "12,542",
+                    "Total area square miles": 5543,
+                    "Total area square kilometers": 14357,
+                    "Land area square miles": 4842,
+                    "Land area square kilometers": 12542,
                     "Water area square miles": 701,
-                    "Water area square kilometers": "1,816",
-                    "percentWaterArea": "12.60",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1816,
+                    "Percent Water Area": 12.60
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5535,15 +5521,13 @@ export default {
                 "properties": {
                     "name": "Delaware",
                     "density": 464.3,
-                    "Total area square miles": "2,489",
-                    "Total area square kilometers": "6,446",
-                    "Land area square miles": "1,949",
-                    "Land area square kilometers": "5,047",
+                    "Total area square miles": 2489,
+                    "Total area square kilometers": 6446,
+                    "Land area square miles": 1949,
+                    "Land area square kilometers": 5047,
                     "Water area square miles": 540,
-                    "Water area square kilometers": "1,399",
-                    "percentWaterArea": "21.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1399,
+                    "Percent Water Area": 21.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5617,9 +5601,7 @@ export default {
                     "Land area square kilometers": 158,
                     "Water area square miles": 7,
                     "Water area square kilometers": 19,
-                    "percentWaterArea": "10.30",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Percent Water Area": 10.30
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5655,15 +5637,13 @@ export default {
                 "properties": {
                     "name": "Florida",
                     "density": 353.4,
-                    "Total area square miles": "65,758",
-                    "Total area square kilometers": "170,312",
-                    "Land area square miles": "53,625",
-                    "Land area square kilometers": "138,887",
-                    "Water area square miles": "12,133",
-                    "Water area square kilometers": "31,424",
-                    "percentWaterArea": "18.50",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 65758,
+                    "Total area square kilometers": 170312,
+                    "Land area square miles": 53625,
+                    "Land area square kilometers": 138887,
+                    "Water area square miles": 12133,
+                    "Water area square kilometers": 31424,
+                    "Percent Water Area": 18.50
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -5991,15 +5971,13 @@ export default {
                 "properties": {
                     "name": "Georgia",
                     "density": 169.5,
-                    "Total area square miles": "59,425",
-                    "Total area square kilometers": "153,910",
-                    "Land area square miles": "57,513",
-                    "Land area square kilometers": "148,959",
-                    "Water area square miles": "1,912",
-                    "Water area square kilometers": "4,951",
-                    "percentWaterArea": "3.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 59425,
+                    "Total area square kilometers": 153910,
+                    "Land area square miles": 57513,
+                    "Land area square kilometers": 148959,
+                    "Water area square miles": 1912,
+                    "Water area square kilometers": 4951,
+                    "Percent Water Area": 3.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -6219,15 +6197,13 @@ export default {
                 "properties": {
                     "name": "Hawaii",
                     "density": 214.1,
-                    "Total area square miles": "10,932",
-                    "Total area square kilometers": "28,313",
-                    "Land area square miles": "6,423",
-                    "Land area square kilometers": "16,635",
-                    "Water area square miles": "4,509",
-                    "Water area square kilometers": "11,678",
-                    "percentWaterArea": "41.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 10932,
+                    "Total area square kilometers": 28313,
+                    "Land area square miles": 6423,
+                    "Land area square kilometers": 16635,
+                    "Water area square miles": 4509,
+                    "Water area square kilometers": 11678,
+                    "Percent Water Area": 41.20
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -6457,15 +6433,13 @@ export default {
                 "properties": {
                     "name": "Idaho",
                     "density": 19.15,
-                    "Total area square miles": "83,569",
-                    "Total area square kilometers": "216,443",
-                    "Land area square miles": "82,643",
-                    "Land area square kilometers": "214,045",
+                    "Total area square miles": 83569,
+                    "Total area square kilometers": 216443,
+                    "Land area square miles": 82643,
+                    "Land area square kilometers": 214045,
                     "Water area square miles": 926,
-                    "Water area square kilometers": "2,398",
-                    "percentWaterArea": "1.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 2398,
+                    "Percent Water Area": 1.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -6745,15 +6719,13 @@ export default {
                 "properties": {
                     "name": "Illinois",
                     "density": 231.5,
-                    "Total area square miles": "57,914",
-                    "Total area square kilometers": "149,995",
-                    "Land area square miles": "55,519",
-                    "Land area square kilometers": "143,793",
-                    "Water area square miles": "2,395",
-                    "Water area square kilometers": "6,202",
-                    "percentWaterArea": "4.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 57914,
+                    "Total area square kilometers": 149995,
+                    "Land area square miles": 55519,
+                    "Land area square kilometers": 143793,
+                    "Water area square miles": 2395,
+                    "Water area square kilometers": 6202,
+                    "Percent Water Area": 4.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -7037,15 +7009,13 @@ export default {
                 "properties": {
                     "name": "Indiana",
                     "density": 181.7,
-                    "Total area square miles": "36,420",
-                    "Total area square kilometers": "94,326",
-                    "Land area square miles": "35,826",
-                    "Land area square kilometers": "92,789",
+                    "Total area square miles": 36420,
+                    "Total area square kilometers": 94326,
+                    "Land area square miles": 35826,
+                    "Land area square kilometers": 92789,
                     "Water area square miles": 593,
-                    "Water area square kilometers": "1,537",
-                    "percentWaterArea": "1.60",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1537,
+                    "Percent Water Area": 1.60
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -7245,15 +7215,13 @@ export default {
                 "properties": {
                     "name": "Iowa",
                     "density": 54.81,
-                    "Total area square miles": "56,273",
-                    "Total area square kilometers": "145,746",
-                    "Land area square miles": "55,857",
-                    "Land area square kilometers": "144,669",
+                    "Total area square miles": 56273,
+                    "Total area square kilometers": 145746,
+                    "Land area square miles": 55857,
+                    "Land area square kilometers": 144669,
                     "Water area square miles": 416,
-                    "Water area square kilometers": "1,077",
-                    "percentWaterArea": "0.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1077,
+                    "Percent Water Area": 0.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -7469,15 +7437,13 @@ export default {
                 "properties": {
                     "name": "Kansas",
                     "density": 35.09,
-                    "Total area square miles": "82,278",
-                    "Total area square kilometers": "213,100",
-                    "Land area square miles": "81,759",
-                    "Land area square kilometers": "211,754",
+                    "Total area square miles": 82278,
+                    "Total area square kilometers": 213100,
+                    "Land area square miles": 81759,
+                    "Land area square kilometers": 211754,
                     "Water area square miles": 520,
-                    "Water area square kilometers": "1,346",
-                    "percentWaterArea": "0.60",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1346,
+                    "Percent Water Area": 0.60
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -7545,15 +7511,13 @@ export default {
                 "properties": {
                     "name": "Kentucky",
                     "density": 110,
-                    "Total area square miles": "40,408",
-                    "Total area square kilometers": "104,656",
-                    "Land area square miles": "39,486",
-                    "Land area square kilometers": "102,269",
+                    "Total area square miles": 40408,
+                    "Total area square kilometers": 104656,
+                    "Land area square miles": 39486,
+                    "Land area square kilometers": 102269,
                     "Water area square miles": 921,
-                    "Water area square kilometers": "2,387",
-                    "percentWaterArea": "2.30",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 2387,
+                    "Percent Water Area": 2.30
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -7869,15 +7833,13 @@ export default {
                 "properties": {
                     "name": "Louisiana",
                     "density": 105,
-                    "Total area square miles": "52,378",
-                    "Total area square kilometers": "135,659",
-                    "Land area square miles": "43,204",
-                    "Land area square kilometers": "111,898",
-                    "Water area square miles": "9,174",
-                    "Water area square kilometers": "23,761",
-                    "percentWaterArea": "17.50",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 52378,
+                    "Total area square kilometers": 135659,
+                    "Land area square miles": 43204,
+                    "Land area square kilometers": 111898,
+                    "Water area square miles": 9174,
+                    "Water area square kilometers": 23761,
+                    "Percent Water Area": 17.50
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -8197,15 +8159,13 @@ export default {
                 "properties": {
                     "name": "Maine",
                     "density": 43.04,
-                    "Total area square miles": "35,380",
-                    "Total area square kilometers": "91,633",
-                    "Land area square miles": "30,843",
-                    "Land area square kilometers": "79,883",
-                    "Water area square miles": "4,537",
-                    "Water area square kilometers": "11,750",
-                    "percentWaterArea": "12.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 35380,
+                    "Total area square kilometers": 91633,
+                    "Land area square miles": 30843,
+                    "Land area square kilometers": 79883,
+                    "Water area square miles": 4537,
+                    "Water area square kilometers": 11750,
+                    "Percent Water Area": 12.80
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -8485,15 +8445,13 @@ export default {
                 "properties": {
                     "name": "Maryland",
                     "density": 596.3,
-                    "Total area square miles": "12,406",
-                    "Total area square kilometers": "32,131",
-                    "Land area square miles": "9,707",
-                    "Land area square kilometers": "25,142",
-                    "Water area square miles": "2,699",
-                    "Water area square kilometers": "6,990",
-                    "percentWaterArea": "21.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 12406,
+                    "Total area square kilometers": 32131,
+                    "Land area square miles": 9707,
+                    "Land area square kilometers": 25142,
+                    "Water area square miles": 2699,
+                    "Water area square kilometers": 6990,
+                    "Percent Water Area": 21.80
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -8771,15 +8729,13 @@ export default {
                 "properties": {
                     "name": "Massachusetts",
                     "density": 840.2,
-                    "Total area square miles": "10,554",
-                    "Total area square kilometers": "27,336",
-                    "Land area square miles": "7,800",
-                    "Land area square kilometers": "20,202",
-                    "Water area square miles": "2,754",
-                    "Water area square kilometers": "7,134",
-                    "percentWaterArea": "26.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 10554,
+                    "Total area square kilometers": 27336,
+                    "Land area square miles": 7800,
+                    "Land area square kilometers": 20202,
+                    "Water area square miles": 2754,
+                    "Water area square kilometers": 7134,
+                    "Percent Water Area": 26.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -8935,15 +8891,13 @@ export default {
                 "properties": {
                     "name": "Michigan",
                     "density": 173.9,
-                    "Total area square miles": "96,714",
-                    "Total area square kilometers": "250,487",
-                    "Land area square miles": "56,539",
-                    "Land area square kilometers": "146,435",
-                    "Water area square miles": "40,175",
-                    "Water area square kilometers": "104,052",
-                    "percentWaterArea": "41.50",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 96714,
+                    "Total area square kilometers": 250487,
+                    "Land area square miles": 56539,
+                    "Land area square kilometers": 146435,
+                    "Water area square miles": 40175,
+                    "Water area square kilometers": 104052,
+                    "Percent Water Area": 41.50
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -9581,15 +9535,13 @@ export default {
                 "properties": {
                     "name": "Minnesota",
                     "density": 67.14,
-                    "Total area square miles": "86,936",
-                    "Total area square kilometers": "225,163",
-                    "Land area square miles": "79,627",
-                    "Land area square kilometers": "206,232",
-                    "Water area square miles": "7,309",
-                    "Water area square kilometers": "18,930",
-                    "percentWaterArea": "8.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 86936,
+                    "Total area square kilometers": 225163,
+                    "Land area square miles": 79627,
+                    "Land area square kilometers": 206232,
+                    "Water area square miles": 7309,
+                    "Water area square kilometers": 18930,
+                    "Percent Water Area": 8.40
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -9937,15 +9889,13 @@ export default {
                 "properties": {
                     "name": "Mississippi",
                     "density": 63.5,
-                    "Total area square miles": "48,432",
-                    "Total area square kilometers": "125,438",
-                    "Land area square miles": "46,923",
-                    "Land area square kilometers": "121,531",
-                    "Water area square miles": "1,509",
-                    "Water area square kilometers": "3,907",
-                    "percentWaterArea": "3.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 48432,
+                    "Total area square kilometers": 125438,
+                    "Land area square miles": 46923,
+                    "Land area square kilometers": 121531,
+                    "Water area square miles": 1509,
+                    "Water area square kilometers": 3907,
+                    "Percent Water Area": 3.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10145,15 +10095,13 @@ export default {
                 "properties": {
                     "name": "Missouri",
                     "density": 87.26,
-                    "Total area square miles": "69,707",
-                    "Total area square kilometers": "180,540",
-                    "Land area square miles": "68,742",
-                    "Land area square kilometers": "178,040",
+                    "Total area square miles": 69707,
+                    "Total area square kilometers": 180540,
+                    "Land area square miles": 68742,
+                    "Land area square kilometers": 178040,
                     "Water area square miles": 965,
-                    "Water area square kilometers": "2,501",
-                    "percentWaterArea": "1.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 2501,
+                    "Percent Water Area": 1.40
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10381,15 +10329,13 @@ export default {
                 "properties": {
                     "name": "Montana",
                     "density": 6.858,
-                    "Total area square miles": "147,040",
-                    "Total area square kilometers": "380,831",
-                    "Land area square miles": "145,546",
-                    "Land area square kilometers": "376,962",
-                    "Water area square miles": "1,494",
-                    "Water area square kilometers": "3,869",
-                    "percentWaterArea": "1.00",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 147040,
+                    "Total area square kilometers": 380831,
+                    "Land area square miles": 145546,
+                    "Land area square kilometers": 376962,
+                    "Water area square miles": 1494,
+                    "Water area square kilometers": 3869,
+                    "Percent Water Area": 1.00
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10613,15 +10559,13 @@ export default {
                 "properties": {
                     "name": "Nebraska",
                     "density": 23.97,
-                    "Total area square miles": "77,348",
-                    "Total area square kilometers": "200,330",
-                    "Land area square miles": "76,824",
-                    "Land area square kilometers": "198,974",
+                    "Total area square miles": 77348,
+                    "Total area square kilometers": 200330,
+                    "Land area square miles": 76824,
+                    "Land area square kilometers": 198974,
                     "Water area square miles": 524,
-                    "Water area square kilometers": "1,356",
-                    "percentWaterArea": "0.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1356,
+                    "Percent Water Area": 0.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10753,15 +10697,13 @@ export default {
                 "properties": {
                     "name": "Nevada",
                     "density": 24.8,
-                    "Total area square miles": "110,572",
-                    "Total area square kilometers": "286,380",
-                    "Land area square miles": "109,781",
-                    "Land area square kilometers": "284,332",
+                    "Total area square miles": 110572,
+                    "Total area square kilometers": 286380,
+                    "Land area square miles": 109781,
+                    "Land area square kilometers": 284332,
                     "Water area square miles": 791,
-                    "Water area square kilometers": "2,048",
-                    "percentWaterArea": "0.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 2048,
+                    "Percent Water Area": 0.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10861,15 +10803,13 @@ export default {
                 "properties": {
                     "name": "New Hampshire",
                     "density": 147,
-                    "Total area square miles": "9,349",
-                    "Total area square kilometers": "24,214",
-                    "Land area square miles": "8,953",
-                    "Land area square kilometers": "23,187",
+                    "Total area square miles": 9349,
+                    "Total area square kilometers": 24214,
+                    "Land area square miles": 8953,
+                    "Land area square kilometers": 23187,
                     "Water area square miles": 397,
-                    "Water area square kilometers": "1,027",
-                    "percentWaterArea": "4.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1027,
+                    "Percent Water Area": 4.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -10997,15 +10937,13 @@ export default {
                 "properties": {
                     "name": "New Jersey",
                     "density": 1189,
-                    "Total area square miles": "8,723",
-                    "Total area square kilometers": "22,591",
-                    "Land area square miles": "7,354",
-                    "Land area square kilometers": "19,047",
-                    "Water area square miles": "1,368",
-                    "Water area square kilometers": "3,544",
-                    "percentWaterArea": "15.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 8723,
+                    "Total area square kilometers": 22591,
+                    "Land area square miles": 7354,
+                    "Land area square kilometers": 19047,
+                    "Water area square miles": 1368,
+                    "Water area square kilometers": 3544,
+                    "Percent Water Area": 15.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -11149,15 +11087,13 @@ export default {
                 "properties": {
                     "name": "New Mexico",
                     "density": 17.16,
-                    "Total area square miles": "121,590",
-                    "Total area square kilometers": "314,917",
-                    "Land area square miles": "121,298",
-                    "Land area square kilometers": "314,161",
+                    "Total area square miles": 121590,
+                    "Total area square kilometers": 314917,
+                    "Land area square miles": 121298,
+                    "Land area square kilometers": 314161,
                     "Water area square miles": 292,
                     "Water area square kilometers": 757,
-                    "percentWaterArea": "0.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Percent Water Area": 0.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -11241,15 +11177,13 @@ export default {
                 "properties": {
                     "name": "New York",
                     "density": 412.3,
-                    "Total area square miles": "54,555",
-                    "Total area square kilometers": "141,297",
-                    "Land area square miles": "47,126",
-                    "Land area square kilometers": "122,057",
-                    "Water area square miles": "7,429",
-                    "Water area square kilometers": "19,240",
-                    "percentWaterArea": "13.60",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 54555,
+                    "Total area square kilometers": 141297,
+                    "Land area square miles": 47126,
+                    "Land area square kilometers": 122057,
+                    "Water area square miles": 7429,
+                    "Water area square kilometers": 19240,
+                    "Percent Water Area": 13.60
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -11537,15 +11471,13 @@ export default {
                 "properties": {
                     "name": "North Carolina",
                     "density": 198.2,
-                    "Total area square miles": "53,819",
-                    "Total area square kilometers": "139,391",
-                    "Land area square miles": "48,618",
-                    "Land area square kilometers": "125,920",
-                    "Water area square miles": "5,201",
-                    "Water area square kilometers": "13,471",
-                    "percentWaterArea": "9.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 53819,
+                    "Total area square kilometers": 139391,
+                    "Land area square miles": 48618,
+                    "Land area square kilometers": 125920,
+                    "Water area square miles": 5201,
+                    "Water area square kilometers": 13471,
+                    "Percent Water Area": 9.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -11805,15 +11737,13 @@ export default {
                 "properties": {
                     "name": "North Dakota",
                     "density": 9.916,
-                    "Total area square miles": "70,698",
-                    "Total area square kilometers": "183,108",
-                    "Land area square miles": "69,001",
-                    "Land area square kilometers": "178,711",
-                    "Water area square miles": "1,698",
-                    "Water area square kilometers": "4,397",
-                    "percentWaterArea": "2.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 70698,
+                    "Total area square kilometers": 183108,
+                    "Land area square miles": 69001,
+                    "Land area square kilometers": 178711,
+                    "Water area square miles": 1698,
+                    "Water area square kilometers": 4397,
+                    "Percent Water Area": 2.40
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -11893,15 +11823,13 @@ export default {
                 "properties": {
                     "name": "Ohio",
                     "density": 281.9,
-                    "Total area square miles": "44,826",
-                    "Total area square kilometers": "116,098",
-                    "Land area square miles": "40,861",
-                    "Land area square kilometers": "105,829",
-                    "Water area square miles": "3,965",
-                    "Water area square kilometers": "10,269",
-                    "percentWaterArea": "8.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 44826,
+                    "Total area square kilometers": 116098,
+                    "Land area square miles": 40861,
+                    "Land area square kilometers": 105829,
+                    "Water area square miles": 3965,
+                    "Water area square kilometers": 10269,
+                    "Percent Water Area": 8.80
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -12105,15 +12033,13 @@ export default {
                 "properties": {
                     "name": "Oklahoma",
                     "density": 55.22,
-                    "Total area square miles": "69,899",
-                    "Total area square kilometers": "181,037",
-                    "Land area square miles": "68,595",
-                    "Land area square kilometers": "177,660",
-                    "Water area square miles": "1,304",
-                    "Water area square kilometers": "3,377",
-                    "percentWaterArea": "1.90",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 69899,
+                    "Total area square kilometers": 181037,
+                    "Land area square miles": 68595,
+                    "Land area square kilometers": 177660,
+                    "Water area square miles": 1304,
+                    "Water area square kilometers": 3377,
+                    "Percent Water Area": 1.90
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -12309,15 +12235,13 @@ export default {
                 "properties": {
                     "name": "Oregon",
                     "density": 40.33,
-                    "Total area square miles": "98,379",
-                    "Total area square kilometers": "254,799",
-                    "Land area square miles": "95,988",
-                    "Land area square kilometers": "248,608",
-                    "Water area square miles": "2,391",
-                    "Water area square kilometers": "6,191",
-                    "percentWaterArea": "2.40",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 98379,
+                    "Total area square kilometers": 254799,
+                    "Land area square miles": 95988,
+                    "Land area square kilometers": 248608,
+                    "Water area square miles": 2391,
+                    "Water area square kilometers": 6191,
+                    "Percent Water Area": 2.40
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -12557,15 +12481,13 @@ export default {
                 "properties": {
                     "name": "Pennsylvania",
                     "density": 284.3,
-                    "Total area square miles": "46,054",
-                    "Total area square kilometers": "119,280",
-                    "Land area square miles": "44,743",
-                    "Land area square kilometers": "115,883",
-                    "Water area square miles": "1,312",
-                    "Water area square kilometers": "3,397",
-                    "percentWaterArea": "2.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 46054,
+                    "Total area square kilometers": 119280,
+                    "Land area square miles": 44743,
+                    "Land area square kilometers": 115883,
+                    "Water area square miles": 1312,
+                    "Water area square kilometers": 3397,
+                    "Percent Water Area": 2.80
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -12713,15 +12635,13 @@ export default {
                 "properties": {
                     "name": "Rhode Island",
                     "density": 1006,
-                    "Total area square miles": "1,545",
-                    "Total area square kilometers": "4,001",
-                    "Land area square miles": "1,034",
-                    "Land area square kilometers": "2,678",
+                    "Total area square miles": 1545,
+                    "Total area square kilometers": 4001,
+                    "Land area square miles": 1034,
+                    "Land area square kilometers": 2678,
                     "Water area square miles": 511,
-                    "Water area square kilometers": "1,324",
-                    "percentWaterArea": "33.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1324,
+                    "Percent Water Area": 33.10
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -12803,15 +12723,13 @@ export default {
                 "properties": {
                     "name": "South Carolina",
                     "density": 155.4,
-                    "Total area square miles": "32,020",
-                    "Total area square kilometers": "82,933",
-                    "Land area square miles": "30,061",
-                    "Land area square kilometers": "77,857",
-                    "Water area square miles": "1,960",
-                    "Water area square kilometers": "5,076",
-                    "percentWaterArea": "6.10",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 32020,
+                    "Total area square kilometers": 82933,
+                    "Land area square miles": 30061,
+                    "Land area square kilometers": 77857,
+                    "Water area square miles": 1960,
+                    "Water area square kilometers": 5076,
+                    "Percent Water Area": 6.10
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -13003,15 +12921,13 @@ export default {
                 "properties": {
                     "name": "South Dakota",
                     "density": 98.07,
-                    "Total area square miles": "77,116",
-                    "Total area square kilometers": "199,729",
-                    "Land area square miles": "75,811",
-                    "Land area square kilometers": "196,350",
-                    "Water area square miles": "1,305",
-                    "Water area square kilometers": "3,379",
-                    "percentWaterArea": "1.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 7711,
+                    "Total area square kilometers": 199729,
+                    "Land area square miles": 75811,
+                    "Land area square kilometers": 19635,
+                    "Water area square miles": 1305,
+                    "Water area square kilometers": 3379,
+                    "Percent Water Area": 1.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -13143,15 +13059,13 @@ export default {
                 "properties": {
                     "name": "Tennessee",
                     "density": 88.08,
-                    "Total area square miles": "42,144",
-                    "Total area square kilometers": "109,153",
-                    "Land area square miles": "41,235",
-                    "Land area square kilometers": "106,798",
+                    "Total area square miles": 42144,
+                    "Total area square kilometers": 109153,
+                    "Land area square miles": 41235,
+                    "Land area square kilometers": 106798,
                     "Water area square miles": 909,
-                    "Water area square kilometers": "2,355",
-                    "percentWaterArea": "2.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 2355,
+                    "Percent Water Area": 2.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -13339,15 +13253,13 @@ export default {
                 "properties": {
                     "name": "Texas",
                     "density": 98.07,
-                    "Total area square miles": "268,596",
-                    "Total area square kilometers": "695,662",
-                    "Land area square miles": "261,232",
-                    "Land area square kilometers": "676,587",
-                    "Water area square miles": "7,365",
-                    "Water area square kilometers": "19,075",
-                    "percentWaterArea": "2.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 268596,
+                    "Total area square kilometers": 695662,
+                    "Land area square miles": 261232,
+                    "Land area square kilometers": 676587,
+                    "Water area square miles": 7365,
+                    "Water area square kilometers": 19075,
+                    "Percent Water Area": 2.70
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -13971,15 +13883,13 @@ export default {
                 "properties": {
                     "name": "Utah",
                     "density": 34.3,
-                    "Total area square miles": "84,897",
-                    "Total area square kilometers": "219,882",
-                    "Land area square miles": "82,170",
-                    "Land area square kilometers": "212,818",
-                    "Water area square miles": "2,727",
-                    "Water area square kilometers": "7,064",
-                    "percentWaterArea": "3.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 84897,
+                    "Total area square kilometers": 219882,
+                    "Land area square miles": 82170,
+                    "Land area square kilometers": 212818,
+                    "Water area square miles": 2727,
+                    "Water area square kilometers": 7064,
+                    "Percent Water Area": 3.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -14043,15 +13953,13 @@ export default {
                 "properties": {
                     "name": "Vermont",
                     "density": 67.73,
-                    "Total area square miles": "9,616",
-                    "Total area square kilometers": "24,906",
-                    "Land area square miles": "9,217",
-                    "Land area square kilometers": "23,871",
+                    "Total area square miles": 9616,
+                    "Total area square kilometers": 24906,
+                    "Land area square miles": 9217,
+                    "Land area square kilometers": 23871,
                     "Water area square miles": 400,
-                    "Water area square kilometers": "1,035",
-                    "percentWaterArea": "4.20",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1035,
+                    "Percent Water Area": 4.20
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -14179,15 +14087,13 @@ export default {
                 "properties": {
                     "name": "Virginia",
                     "density": 204.5,
-                    "Total area square miles": "42,775",
-                    "Total area square kilometers": "110,787",
-                    "Land area square miles": "39,490",
-                    "Land area square kilometers": "102,279",
-                    "Water area square miles": "3,285",
-                    "Water area square kilometers": "8,508",
-                    "percentWaterArea": "7.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 42775,
+                    "Total area square kilometers": 110787,
+                    "Land area square miles": 39490,
+                    "Land area square kilometers": 102279,
+                    "Water area square miles": 3285,
+                    "Water area square kilometers": 8508,
+                    "Percent Water Area": 7.70
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -14533,15 +14439,13 @@ export default {
                 "properties": {
                     "name": "Washington",
                     "density": 102.6,
-                    "Total area square miles": "71,298",
-                    "Total area square kilometers": "184,661",
-                    "Land area square miles": "66,456",
-                    "Land area square kilometers": "172,119",
-                    "Water area square miles": "4,842",
-                    "Water area square kilometers": "12,542",
-                    "percentWaterArea": "6.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 71298,
+                    "Total area square kilometers": 184661,
+                    "Land area square miles": 66456,
+                    "Land area square kilometers": 172119,
+                    "Water area square miles": 4842,
+                    "Water area square kilometers": 12542,
+                    "Percent Water Area": 6.80
                 },
                 "geometry": {
                     "type": "MultiPolygon",
@@ -14855,14 +14759,13 @@ export default {
                 "properties": {
                     "name": "West Virginia",
                     "density": 77.06,
-                    "Total area square kilometers": "62,756",
-                    "Land area square miles": "24,038",
-                    "Land area square kilometers": "62,259",
+                    "Total area square miles": 38995,
+                    "Total area square kilometers": 62756,
+                    "Land area square miles": 24038,
+                    "Land area square kilometers": 62259,
                     "Water area square miles": 192,
                     "Water area square kilometers": 497,
-                    "percentWaterArea": "0.80",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Percent Water Area": 0.80
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -15138,15 +15041,13 @@ export default {
                 "properties": {
                     "name": "Wisconsin",
                     "density": 105.2,
-                    "Total area square miles": "65,496",
-                    "Total area square kilometers": "169,635",
-                    "Land area square miles": "54,158",
-                    "Land area square kilometers": "140,268",
-                    "Water area square miles": "11,339",
-                    "Water area square kilometers": "29,367",
-                    "percentWaterArea": "17.30",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Total area square miles": 65496,
+                    "Total area square kilometers": 169635,
+                    "Land area square miles": 54158,
+                    "Land area square kilometers": 140268,
+                    "Water area square miles": 11339,
+                    "Water area square kilometers": 29367,
+                    "Percent Water Area": 17.30
                 },
                 "geometry": {
                     "type": "Polygon",
@@ -15462,15 +15363,13 @@ export default {
                 "properties": {
                     "name": "Wyoming",
                     "density": 5.851,
-                    "Total area square miles": "97,813",
-                    "Total area square kilometers": "253,335",
-                    "Land area square miles": "97,093",
-                    "Land area square kilometers": "251,470",
+                    "Total area square miles": 97813,
+                    "Total area square kilometers": 253335,
+                    "Land area square miles": 97093,
+                    "Land area square kilometers": 251470,
                     "Water area square miles": 720,
-                    "Water area square kilometers": "1,864",
-                    "percentWaterArea": "0.70",
-                    "extrusionHeight": 0,
-                    "stateColor": ""
+                    "Water area square kilometers": 1864,
+                    "Percent Water Area": 0.70
                 },
                 "geometry": {
                     "type": "Polygon",
